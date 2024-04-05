@@ -1,0 +1,131 @@
+<!-- SECTION TITLE  -->
+<section class="section-title container-fluid bg-secondary mt-11">
+  <div class="container py-4 d-flex align-items-center justify-content-between">
+    <h2 class="fs-5 fw-bolder">Account</h2>
+    <span class="text-border-color"
+      ><a class="text-decoration-none text-primary fw-medium" href="">Home</a> -
+      Account</span
+    >
+  </div>
+</section>
+<!-- MODAL ADDRESS EDIT  -->
+<!-- modal shipping  -->
+<div ng-include="'component/modalShip.html'"></div>
+<!-- modal billing  -->
+<div ng-include="'component/modalBilling.html'"></div>
+<!-- About -->
+<section class="account-header container mt-7">
+  <div class="account-profile">
+    <div class="account-profile-img overflow-hidden">
+      <img src="uploads/account.JPG" alt="" class="rounded-circle img-cover" />
+    </div>
+    <div class="account-profile-info mt-1">
+      <h2 class="name fs-5">Hoang Thong nè!</h2>
+      <span class="date fs-6 text-border-color"
+        >Carrot Member Since Sep 2022</span
+      >
+    </div>
+  </div>
+</section>
+<section class="account-main container my-5">
+  <div class="row g-5">
+    <div class="col-lg-3 col-sm-12 col-12 wow fadeInLeft">
+      <div
+        class="account-nav p-5 border border-2 rounded-2 border-secondary position-sticky top-0"
+      >
+        <ul class="p-0 d-flex flex-column gap-3">
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="grid"></ion-icon>
+            Dashboard
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="cart"></ion-icon>
+            My order
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color active-nav-account py-1 rounded-2 px-3"
+          >
+            <ion-icon name="home"></ion-icon>
+            Address
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="person"></ion-icon>
+            Account
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="log-out"></ion-icon>
+            Logout
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="col-lg-9 col-sm-12 col-12 wow fadeInRight p-5 border border-2 rounded-2 border-secondary"
+    >
+      <div class="account-content p-5">
+        <div class="row">
+          <h2 class="fs-6 fw-normal text-border-color mb-2">
+            The following addresses will be used on the checkout page by
+            default.
+          </h2>
+          <div class="col-lg-6 col-sm-12 mt-2">
+            <div
+              class="account-address-header d-flex justify-content-between border-bottom border-border-color border-2"
+            >
+              <h2 class="fs-5">Shipping Address</h2>
+              <ion-icon
+                data-bs-toggle="modal"
+                data-bs-target="#shipping"
+                class="fs-5 cursor"
+                name="create-outline"
+              ></ion-icon>
+            </div>
+            <div
+              class="account-address-body d-flex flex-column mt-3 text-border-color"
+            >
+              <span>Name: Thong den day!</span>
+              <span>Email: ht01252004@gmail.com</span>
+              <span>Phone: 123 456 789</span>
+              <span class="mt-3"
+                >Address: Cong vien phan mem Quang Trung, Quan 12, Thanh Pho Ho
+                Chi Minh</span
+              >
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-12 mt-2">
+            <div
+              class="account-address-header d-flex justify-content-between border-bottom border-border-color border-2"
+            >
+              <h2 class="fs-5">Billing Address</h2>
+              <ion-icon
+                data-bs-toggle="modal"
+                data-bs-target="#billing"
+                class="fs-5 cursor"
+                name="create-outline"
+              ></ion-icon>
+            </div>
+            <div
+              class="account-address-body d-flex flex-column mt-3 text-border-color"
+            >
+              <span>Name: Thong den day!</span>
+              <span>Email: ht01252004@gmail.com</span>
+              <span>Phone: 123 456 789</span>
+              <span class="mt-3"
+                >Address: Cong vien phan mem Quang Trung, Quan 12, Thanh Pho Ho
+                Chi Minh</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

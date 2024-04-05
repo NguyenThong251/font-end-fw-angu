@@ -1,0 +1,196 @@
+<!-- SECTION TITLE  -->
+<section class="section-title container-fluid bg-secondary mt-11">
+  <div class="container py-4 d-flex align-items-center justify-content-between">
+    <h2 class="fs-5 fw-bolder">Signup</h2>
+    <span class="text-border-color"
+      ><a class="text-decoration-none text-primary fw-medium" href="">Home</a> -
+      Signup</span
+    >
+  </div>
+</section>
+
+<!-- LOGIN -->
+<section class="section-login my-7 container">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-4"></div>
+        <div
+          class="col-4 wow fadeInUp d-flex justify-content-center p-4 border rounded-2 border-secondary d-flex flex-column gap-3"
+        >
+          <div class="form-logo d-flex justify-content-center">
+            <img src="uploads/logo.png" alt="" width="120" />
+          </div>
+          <form name="myForm" class="row g-3 needs-validation" novalidate>
+            <div class="col-md-12">
+              <label for="fullname" class="form-label fw-medium"
+                >Fullname</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="fullname"
+                name="fullname"
+                ng-model="user.name"
+                required
+              />
+              <div
+                class="text-danger fs-8"
+                ng-show="myForm.fullname.$error.required"
+              >
+                Fullname is required.
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label for="validationCustomEmail" class="form-label fw-medium"
+                >Email</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="validationCustomEmail"
+                name="validationCustomEmail"
+                ng-model="user.email"
+                required
+              />
+              <div
+                class="text-danger fs-8"
+                ng-show="myForm.validationCustomEmail.$error.required"
+              >
+                Email is required.
+              </div>
+              <div
+                class="text-danger fs-8"
+                ng-show="myForm.validationCustomEmail.$error.email"
+              >
+                Invalid email address.
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label for="phone" class="form-label fw-medium"
+                >Phone number</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="phone"
+                ng-model="user.phone"
+                name="phone"
+                ng-minlength="10"
+                required
+              />
+              <div
+                class="text-danger fs-8"
+                ng-show="myForm.phone.$error.required"
+              >
+                Phone number is required.
+              </div>
+              <div
+                class="text-danger fs-8"
+                ng-show="myForm.phone.$error.minlength"
+              >
+                Phone number is minlength.
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label for="password" class="form-label fw-medium"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                aria-describedby="inputGroupPrepend"
+                ng-model="user.password"
+                name="password"
+                required
+                ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/"
+              />
+              <div
+                class="text-danger fs-8"
+                ng-show="myForm.password.$error.required"
+              >
+                Password is required.
+              </div>
+              <div
+                class="text-danger fs-8"
+                ng-show="myForm.password.$error.pattern"
+              >
+                Incorrect password format.
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label for="passwordconfirm" class="form-label fw-medium"
+                >Password confirm</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="passwordconfirm"
+                aria-describedby="inputGroupPrepend"
+                ng-model="user.passwordConfirm"
+                name="passwordconfirm"
+                required
+                ng-pattern="user.password"
+              />
+              <div
+                class="text-danger fs-8"
+                ng-show="myForm.passwordconfirm.$error.required"
+              >
+                Password confirm is required.
+              </div>
+              <div
+                class="text-danger fs-8"
+                ng-show="myForm.passwordconfirm.$error.pattern"
+              >
+                Password does not match.
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="invalidCheck"
+                  name="invalidCheck"
+                  ng-model="user.agree"
+                  required
+                />
+                <label class="form-check-label" for="invalidCheck"
+                  >Agree to terms and conditions</label
+                >
+                <div
+                  class="text-danger fs-8"
+                  ng-show="myForm.invalidCheck.$error.required"
+                >
+                  You must agree before submitting.
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-12 d-flex justify-content-between align-items-end mt-4"
+            >
+              <button
+                class="btn btn-primary fw-bolder text-white"
+                type="submit"
+                ng-disabled="myForm.$invalid"
+                ng-click="success()"
+              >
+                Signup
+              </button>
+              <span>
+                <a
+                  class="text-decoration-none fw-semibold text-primary fs-6"
+                  href="#!login"
+                  >Login?</a
+                >
+              </span>
+            </div>
+          </form>
+        </div>
+        <div class="col-4"></div>
+      </div>
+    </div>
+  </div>
+</section>

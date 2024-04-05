@@ -1,0 +1,372 @@
+<!-- MODEL SEARCH  -->
+<div
+  class="offcanvas offcanvas-top"
+  style="height: 80vh"
+  tabindex="-1"
+  id="offcanvasSearch"
+  aria-labelledby="offcanvasTopLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasTopLabel">Search Product</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="w-25 mx-auto">
+      <form
+        action=""
+        class="header-search border-bottom border-2 border-primary d-flex align-items-center justify-content-between"
+      >
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control border-0"
+            placeholder="Search Product"
+            aria-label="Recipient's username"
+            aria-describedby="button-addon2"
+            ng-model="keyword"
+          />
+          <button class="btn btn-secondary" type="button" id="button-addon2">
+            <ion-icon name="search" class="text-primary"></ion-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="container mt-3">
+      <!-- owl-carousel owl-theme" -->
+      <!-- id="search-owl" -->
+      <div class="row g-3">
+        <div
+          ng-repeat="product in products | search:keyword:['name','pricenew']"
+          class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 fadeInUp"
+        >
+          <!-- item wow -->
+          <div
+            class="position-relative card-product cursor card p-3 border border-2 bg-white border-light rounded-3 shadow-sm"
+          >
+            <div class="card-header border-0 h-60 position-relative">
+              <img
+                src="./uploads/technology/{{product.img}}"
+                alt=""
+                class="border border-2 border-light rounded-3 w-100"
+              />
+              <div class="card-side-view position-absolute translate-middle">
+                <ion-icon
+                  ng-click="openModal(product)"
+                  class="p-2 rounded-5 bg-white border cursor"
+                  name="eye-outline"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
+                ></ion-icon>
+                <ion-icon
+                  class="p-2 rounded-5 bg-white border cursor"
+                  name="heart-outline"
+                ></ion-icon>
+              </div>
+              <div
+                class="add-to-cart position-absolute top-100 start-50 translate-middle"
+              >
+                <ion-icon
+                  ng-click="addCart(product)"
+                  class="p-2 rounded-5 bg-third text-primary border"
+                  name="cart-outline"
+                ></ion-icon>
+              </div>
+            </div>
+            <div ng-if="product.isSale" class="product-sale position-absolute">
+              <span
+                class="text-sale py-1 px-4 rounded-2 text-white fw-bolder bg-primary"
+                >Sale</span
+              >
+            </div>
+            <div class="card-body p-0 pt-3 border-0 text-center">
+              <h3 class="product-category fs-8 text-border-color">
+                {{product.categoryName}}
+              </h3>
+              <a
+                href="#!detail/{{product.id}}"
+                class="text-dark text-decoration-none"
+              >
+                <span class="product-name hover-list fs-6 fw-medium"
+                  >{{product.name}}</span
+                >
+              </a>
+              <div
+                class="product-price d-flex gap-2 justify-content-center fs-6 pt-2 align-items-center"
+              >
+                <span class="price-new fw-bold text-primary">
+                  <span>{{product.pricenew | number: 0 }}VNĐ</span>
+                </span>
+
+                <del class="price-old text-border-color fw-normal">
+                  <span>{{product.priceold | number: 0 }}VNĐ</span></del
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODEL SEARCH END  -->
+<!-- HEADER  -->
+<header class="header bg-white" id="myHeader">
+  <div class="header-top container border-bottom border-2 border-light">
+    <div
+      class="header-top-main align-items-center justify-content-between py-3"
+    >
+      <a href="#">
+        <img src="uploads/logo.png" alt="" class="logo-img logo" width="40" />
+      </a>
+
+      <div
+        class="header-top-right d-flex align-items-center gap-3 fs-6 fw-medium"
+      >
+        <div
+          href=""
+          class="d-flex align-items-center gap-2 hover-list cursor"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasSearch"
+          aria-controls="offcanvasTop"
+        >
+          <ion-icon class="fs-4" name="search-outline"></ion-icon>
+          <span>Search</span>
+        </div>
+        <ul class="navbar-nav">
+          <!-- CÓ USER -->
+          <li class="nav-item dropdown hover-list" ng-if="currentUser">
+            <a
+              class="account nav-link d-flex align-items-center gap-2"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <ion-icon class="fs-4" name="person-outline"></ion-icon>
+              <span>Account</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item" href="#!signup"
+                  >{{currentUser.name}}</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#!checkout">Checkout</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#!setting">Settings</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#!order">Order</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" ng-click="logout()" href="">Logout</a>
+              </li>
+            </ul>
+          </li>
+          <!-- KHONG CÓ USER -->
+          <li class="nav-item dropdown hover-list" ng-if="!currentUser">
+            <a
+              class="account nav-link d-flex align-items-center gap-2"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <ion-icon class="fs-4" name="person-outline"></ion-icon>
+              <span>Account</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#!signup">Register</a></li>
+              <li>
+                <a class="dropdown-item" href="#!checkout">Checkout</a>
+              </li>
+              <!-- <li>
+                <a class="dropdown-item" href="#!order">Order</a>
+              </li> -->
+              <!-- <li>
+                <a class="dropdown-item" href="#!setting">Settings</a>
+              </li> -->
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#!login">Login</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <a
+          href="#!wishlist"
+          class="d-flex text-decoration-none text-dark align-items-center gap-2 hover-list cursor"
+        >
+          <ion-icon class="fs-4" name="heart-outline"></ion-icon>
+          <span>Wishlist</span>
+        </a>
+
+        <div
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+          id="cart-click"
+          href=""
+          class="header-top-right-item header-cart d-flex align-items-center gap-2 hover-list cursor"
+        >
+          <span class="quality px-2 fs-6 rounded-5 bg-primary text-white"
+            >{{ totalUniqueProducts()}}</span
+          >
+
+          <ion-icon class="fs-4 fw-bold" name="cart-outline"></ion-icon>
+          <span>Cart</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div
+      class="menu-list d-flex align-items-center justify-content-between"
+    >
+      <div class="menu-right"></div>
+      <div class="menu-nav"></div>
+      <div class="menu-call">
+        <div class="call d-flex align-items-center gap-2 fw-medium">
+          <ion-icon name="call-outline" class="fs-4"></ion-icon>
+          <span class="fs-5">(+84) 868 412 519</span>
+        </div>
+      </div>
+    </div> -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul
+          class="navbar-nav me-auto my-2 d-flex gap-3 my-lg-0 navbar-nav-scroll"
+          style="--bs-scroll-height: 100px"
+        >
+          <li class="nav-item hover-list">
+            <a
+              class="nav-link nav-link-item active fs-6 fw-medium"
+              aria-current="page"
+              href="#"
+              >Home</a
+            >
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link nav-link-item d-flex align-items-center gap-2 fs-6 fw-medium text-black"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Category <ion-icon name="chevron-down-outline"></ion-icon>
+            </a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="category in categories">
+                <a class="dropdown-item fs-6 fw-medium" href="#!shop">
+                  <!-- ng-click="filterProductsAndRedirect(category.id)" -->
+                  {{category.name}}</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link nav-link-item active fs-6 fw-medium"
+              aria-current="page"
+              href="#!blog"
+              >Blog</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link nav-link-item active fs-6 fw-medium"
+              aria-current="page"
+              href="#!contact"
+              >Contact</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link nav-link-item active fs-6 fw-medium"
+              aria-current="page"
+              href="#!about"
+              >About</a
+            >
+          </li>
+        </ul>
+        <div class="menu-call">
+          <div class="call d-flex align-items-center gap-2 fw-medium">
+            <ion-icon name="call-outline" class="fs-4"></ion-icon>
+            <span class="fs-5">(+84) 868 412 519</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<script>
+  $(document).ready(function () {
+    var prevScrollPos = window.pageYOffset;
+    var header = document.getElementById("myHeader");
+
+    window.onscroll = function () {
+      var currentScrollPos = window.pageYOffset;
+      if (prevScrollPos > currentScrollPos) {
+        header.style.top = "0";
+      } else {
+        header.style.top = "-150px";
+      }
+      prevScrollPos = currentScrollPos;
+    };
+  });
+  $(document).ready(function () {
+    $("#search-owl").owlCarousel({
+      margin: 5,
+      autoPlay: 5000, //Set AutoPlay to 3 seconds
+      pagination: false, // ẩn nút next prev
+      items: 4,
+      // itemsDesktop: [1199, 3],
+      // itemsDesktopSmall: [979, 3],
+      responsive: {
+        0: {
+          items: 1,
+          nav: true,
+        },
+        400: {
+          items: 2,
+          nav: false,
+        },
+        600: {
+          items: 3,
+          nav: false,
+        },
+        1000: {
+          items: 4,
+          nav: true,
+          loop: false,
+        },
+      },
+    });
+  });
+</script>

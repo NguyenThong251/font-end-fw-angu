@@ -1,0 +1,237 @@
+<!-- SECTION TITLE  -->
+<section class="section-title container-fluid bg-secondary mt-11">
+  <div class="container py-4 d-flex align-items-center justify-content-between">
+    <h2 class="fs-5 fw-bolder">Account</h2>
+    <span class="text-border-color"
+      ><a class="text-decoration-none text-primary fw-medium" href="">Home</a> -
+      Account</span
+    >
+  </div>
+</section>
+
+<!-- About -->
+<section class="account-header container mt-7">
+  <div class="account-profile">
+    <div class="account-profile-img overflow-hidden">
+      <img src="uploads/account.JPG" alt="" class="rounded-circle img-cover" />
+    </div>
+    <div class="account-profile-info mt-1">
+      <h2 class="name fs-5">Hoang Thong nè!</h2>
+      <span class="date fs-6 text-border-color"
+        >Carrot Member Since Sep 2022</span
+      >
+    </div>
+  </div>
+</section>
+<section class="account-main container my-5">
+  <div class="row g-5">
+    <div class="col-lg-3 col-sm-12 col-12 wow fadeInLeft">
+      <div
+        class="account-nav p-5 border border-2 rounded-2 border-secondary position-sticky top-0"
+      >
+        <ul class="p-0 d-flex flex-column gap-3">
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="grid"></ion-icon>
+            Dashboard
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="cart"></ion-icon>
+            My order
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="home"></ion-icon>
+            Address
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 active-nav-account rounded-2 px-3"
+          >
+            <ion-icon name="person"></ion-icon>
+            Account
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="log-out"></ion-icon>
+            Logout
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="col-lg-9 col-sm-12 col-12 wow fadeInRight p-5 border border-2 rounded-2 border-secondary"
+    >
+      <div class="account-content p-5">
+        <form class="row g-3 needs-validation" novalidate>
+          <div class="col-md-6 position-relative">
+            <label for="validationTooltip01" class="form-label fw-medium"
+              >First name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="validationTooltip01"
+              required
+            />
+            <div class="invalid-feedback">
+              Please provide a valid firstname.
+            </div>
+            <!-- <div class="valid-tooltip">Looks good!</div> -->
+          </div>
+          <div class="col-md-6 position-relative">
+            <label for="validationTooltip02" class="form-label fw-medium"
+              >Last name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="validationTooltip02"
+              required
+            />
+            <div class="invalid-feedback">Please provide a valid lastname.</div>
+            <!-- <div class="valid-tooltip">Looks good!</div> -->
+          </div>
+          <div class="col-md-12">
+            <label for="validationCustom03" class="form-label fw-medium"
+              >Address</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="validationCustom03"
+              required
+            />
+            <div class="invalid-feedback">Please provide a valid address.</div>
+          </div>
+          <span class="fs-8 text-border-color"
+            >This will be how your name will be displayed in the account section
+            and in reviews</span
+          >
+          <!-- pass -->
+          <div class="col-md-12">
+            <label for="passold" class="form-label fw-medium">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="passold"
+              required
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+            />
+            <div class="invalid-feedback">Password is not strong enough</div>
+          </div>
+          <div class="col-md-12">
+            <label for="passnew" class="form-label fw-medium">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="passnew"
+              required
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+            />
+            <div class="invalid-feedback">Password is not strong enough</div>
+
+            <div class="valid-tooltip">Looks good!</div>
+          </div>
+          <div class="col-md-12">
+            <label for="passnewchange" class="form-label fw-medium"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="passnewchange"
+              required
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+            />
+            <div class="invalid-feedback">Password is not strong enough</div>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary text-white fw-bolder" type="submit">
+              Update
+            </button>
+          </div>
+        </form>
+        <!-- <form action="" class="d-flex flex-column gap-3">
+              <div class="row group-form">
+                <div class="col-md-6">
+                  <div class="form-item">
+                    <label for="firstname" class="fw-medium">Firstname</label>
+                    <input
+                      id="firstname"
+                      type="text"
+                      required=""
+                      class="w-100 border rounded-1 border-secondary py-2 px-3 mt-2"
+                      placeholder="Firstname"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-item">
+                    <label for="lastname" class="fw-medium">Lastname</label>
+                    <input
+                      id="lastname"
+                      type="text"
+                      required=""
+                      class="w-100 border rounded-1 border-secondary py-2 px-3 mt-2"
+                      placeholder="Lastname"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-item">
+                <label for="address" class="fw-medium">Address</label>
+                <input
+                  id="address"
+                  type="text"
+                  required=""
+                  class="w-100 border rounded-1 border-secondary py-2 px-3 mt-2"
+                  placeholder="Address"
+                />
+              </div>
+              <span class="fs-8 text-border-color"
+                >This will be how your name will be displayed in the account
+                section and in reviews</span
+              >
+              <h2 class="fs-6">Password Change</h2>
+              <div class="form-item">
+                <input
+                  id="password"
+                  type="text"
+                  required=""
+                  class="w-100 border rounded-1 border-secondary py-2 px-3 mt-2"
+                  placeholder="Password"
+                />
+              </div>
+              <div class="form-item">
+                <input
+                  id="call"
+                  type="password"
+                  required=""
+                  class="w-100 border rounded-1 border-secondary py-2 px-3 mt-2"
+                  placeholder="Password Change"
+                />
+              </div>
+              <div class="form-item">
+                <input
+                  id="call"
+                  type="password"
+                  required=""
+                  class="w-100 border rounded-1 border-secondary py-2 px-3 mt-2"
+                  placeholder="Password confirm"
+                />
+              </div>
+              <div class="">
+                <button class="btn btn-primary text-white fw-bolder">
+                  Update
+                </button>
+              </div>
+            </form> -->
+      </div>
+    </div>
+  </div>
+</section>

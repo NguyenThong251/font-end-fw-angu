@@ -1,0 +1,213 @@
+<!-- SECTION TITLE  -->
+<section class="section-title container-fluid bg-secondary mt-11">
+  <div class="container py-4 d-flex align-items-center justify-content-between">
+    <h2 class="fs-5 fw-bolder">Account</h2>
+    <span class="text-border-color"
+      ><a class="text-decoration-none text-primary fw-medium" href="">Home</a> -
+      Account</span
+    >
+  </div>
+</section>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="viewbill"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Bill Your Information
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="bill-content">
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 name"
+          >
+            Họ tên: {{selectedBill.firstName}} {{selectedBill.lastName}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 address"
+          >
+            Địa chỉ: {{ selectedBill.address }}, {{ selectedBill.tinh }}, {{
+            selectedBill.huyen }}, {{ selectedBill.phuong }}
+          </div>
+
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 email"
+          >
+            Email: {{selectedBill.email}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 phone"
+          >
+            Phone: {{selectedBill.phoneNumber}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 phone"
+          >
+            PhoneRec: {{selectedBill.phonenumberRec}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 note"
+          >
+            Ghi chú: {{selectedBill.note}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-name"
+          >
+            Họ tên người nhận: {{selectedBill.fullnameRec}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-phone"
+          >
+            Số điện thoại người nhận: {{selectedBill.phonenumberRec}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-address"
+          >
+            Địa chỉ nhận: {{selectedBill.tinhRec}} . {{selectedBill.huyenRec}} .
+            {{selectedBill.phuongRec}}
+          </div>
+          <div
+            ng-repeat="item in selectedBill.cartItems"
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-address"
+          >
+            Sản phẩm: {{item.name}}x{{item.quantity}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-address"
+          >
+            Tổng tiền: {{selectedBill.totalAmount | number:0}} VNĐ
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary text-white"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- About -->
+<section class="account-header container mt-7">
+  <div class="account-profile">
+    <div class="account-profile-img overflow-hidden">
+      <img src="uploads/account.JPG" alt="" class="rounded-circle img-cover" />
+    </div>
+    <div class="account-profile-info mt-1">
+      <h2 class="name fs-5">Hoang Thong nè!</h2>
+      <span class="date fs-6 text-border-color"
+        >Carrot Member Since Sep 2022</span
+      >
+    </div>
+  </div>
+</section>
+<section class="account-main container my-5">
+  <div class="row g-5">
+    <div class="col-lg-3 col-sm-12 col-12 wow fadeInLeft">
+      <div
+        class="account-nav p-5 border border-2 rounded-2 position-sticky top-0 border-secondary"
+      >
+        <ul class="p-0 d-flex flex-column gap-3">
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="grid"></ion-icon>
+            Dashboard
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color active-nav-account py-1 rounded-2 px-3"
+          >
+            <ion-icon name="cart"></ion-icon>
+            My order
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="home"></ion-icon>
+            Address
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="person"></ion-icon>
+            Account
+          </li>
+          <li
+            class="cursor account-list list-group-item d-flex align-items-center gap-3 fs-6 fw-medium text-border-color py-1 rounded-2 px-3"
+          >
+            <ion-icon name="log-out"></ion-icon>
+            Logout
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="col-lg-9 col-sm-12 col-12 wow fadeInRight p-5 border border-2 rounded-2 border-secondary"
+    >
+      <div class="account-content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="fw-medium" scope="col">Order</th>
+              <th class="fw-medium" scope="col">Date</th>
+              <th class="fw-medium" scope="col">Total</th>
+              <th class="fw-medium text-center" scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="item in bills"
+              ng-if="item.userId === currentUser.id"
+            >
+              <th scope="row"><code>#{{ item.id }}</code></th>
+              <td><span>{{ item.date }}</span></td>
+              <td><span>{{ item.totalAmount }}</span></td>
+              <td class="text-center">
+                <ion-icon
+                  ng-click="billdetail(item.id)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#viewbill"
+                  class="cursor"
+                  name="eye-outline"
+                ></ion-icon>
+              </td>
+            </tr>
+            <!-- Trường hợp không có userid -->
+            <!-- <tr ng-if="!currentUser">
+              <th scope="row"><code>#{{bills[0].id}}</code></th>
+              <td><span>{{ bills[0].date }}</span></td>
+              <td><span>{{ bills[0].totalAmount}}</span></td>
+              <td class="text-center">
+                <ion-icon
+                  ng-click="billdetail(bills[0].id)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#viewbill"
+                  class="cursor"
+                  name="eye-outline"
+                ></ion-icon>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

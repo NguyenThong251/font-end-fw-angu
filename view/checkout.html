@@ -1,0 +1,706 @@
+<!-- SECTION TITLE  -->
+<section class="section-title container-fluid bg-secondary mt-11">
+  <div class="container py-4 d-flex align-items-center justify-content-between">
+    <h2 class="fs-5 fw-bolder">Checkout</h2>
+    <span class="text-border-color"
+      ><a class="text-decoration-none text-primary fw-medium" href="">Home</a> -
+      Checkout</span
+    >
+  </div>
+</section>
+<!-- MODAL VOUCHER  -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="voucher"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Reedem voucher</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div>
+        <div class="modal-body d-flex flex-column">
+          <label for="" class="fs-6 fw-semibold">Voucher</label>
+          <input
+            ng-model="voucherCode"
+            class="border border-2 border-secondary mt-3 py-2 px-3 shadow-sm rounded-2"
+            type="text"
+            placeholder="Voucher"
+          />
+          <div id="result-error"></div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary fw-bolder text-border-color"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            ng-click="applyVoucher(voucherCode)"
+            class="btn btn-primary fw-bolder text-white"
+          >
+            Add Voucher
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- CHECKOUT -->
+<section class="section-detail container my-5">
+  <div class="row g-3">
+    <div
+      class="checkout-right wow fadeInLeft col-lg-4 col-md-12 d-flex flex-column gap-3"
+    >
+      <div
+        class="checkout-right-detail-pro p-3 border rounded-1 border-secondary border-2"
+      >
+        <div class="checkout-right-detail-pro-content d-flex flex-column gap-3">
+          <h3 class="fs-5 fw-medium">Summary</h3>
+
+          <div class="add-voucher">
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#voucher"
+              type="button"
+              class="d-flex align-items-center p-1 gap-2 rounded-2 btn fw-medium text-light btn-primary"
+            >
+              <ion-icon name="cash-outline"></ion-icon>Add Voucher
+            </button>
+          </div>
+          <div class="sub-total d-flex justify-content-between">
+            <span>Sub-total</span>
+            <h5 class="fs-6">{{totalQuantity() | number : 0 }}VNĐ</h5>
+          </div>
+          <div class="voucher d-flex justify-content-between">
+            <span>Voucher</span>
+            <h5 class="fs-6">{{appliedVoucherPrice | number : 0 }}VNĐ</h5>
+          </div>
+          <div
+            class="delivery d-flex justify-content-between border-bottom border-secondary pb-3"
+          >
+            <span>Delivery Charges</span>
+            <h5 class="fs-6">{{ applyDelivery() | number : 0 }}VNĐ</h5>
+          </div>
+          <div class="sub-total d-flex justify-content-between">
+            <span class="fs-5 fw-semibold">Total Amount</span>
+            <h5 class="fs-5 fw-semibold">{{totalAll() | number : 0 }}VNĐ</h5>
+          </div>
+          <div class="checkout-pro row">
+            <div
+              ng-repeat="item in cart"
+              class="col-sm-12 border-top border-secondary py-2 border-2"
+            >
+              <div class="row">
+                <div class="col-lg-3 col-sm-12">
+                  <img
+                    src="uploads/technology/{{item.img}}"
+                    alt=""
+                    width="80"
+                    width="80"
+                    class="border border-2 rounded-2 border-secondary"
+                  />
+                </div>
+                <div class="col-lg-9 col-sm-12">
+                  <div class="name-pro-checkout d-flex justify-content-between">
+                    <h3 class="fw-medium fs-6">{{item.name}}</h3>
+                    <div class="checkout-pro-qty text-border-color">
+                      x <span>{{item.quantity}}</span>
+                    </div>
+                  </div>
+                  <div class="checkout-pro-cate">
+                    <span class="text-border-color">{{item.brand}}</span>
+                  </div>
+                  <div
+                    class="product-price d-flex gap-2 fs-6 pt-2 align-items-center"
+                  >
+                    <span class="price-new fw-bold text-primary"
+                      >{{item.pricenew |number : 0 }} VNĐ</span
+                    >
+                    <del class="price-old text-border-color fw-normal"
+                      >{{item.priceold |number : 0 }} VNĐ</del
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="checkout-right-delivery p-3 border rounded-1 border-secondary border-2"
+      >
+        <div class="checkout-right-delivery-content d-flex flex-column gap-2">
+          <h3 class="fs-5 fw-medium">Delivery Method</h3>
+          <span class="text-border-color"
+            >Please select the preferred shipping method to use on this
+            order.</span
+          >
+          <div class="delivery-option row">
+            <div class="col-6 d-flex flex-column gap-2">
+              <span class="fw-medium">Free Shipping</span>
+              <div class="form-check">
+                <input
+                  ng-model="isFreeShipping"
+                  ng-change="updateDeliveryRate(true)"
+                  value="true"
+                  class="form-check-input"
+                  type="radio"
+                  name="deliveryOption"
+                  id="freeShipping"
+                />
+                <label class="form-check-label" for="freeShipping">
+                  Rate - 0 VNĐ
+                </label>
+              </div>
+            </div>
+            <div class="col-6 d-flex flex-column gap-2">
+              <span class="fw-medium">Flat Rate</span>
+              <div class="form-check">
+                <input
+                  ng-model="isFreeShipping"
+                  ng-change="updateDeliveryRate(false)"
+                  ng-value="false"
+                  class="form-check-input"
+                  type="radio"
+                  name="deliveryOption"
+                  id="flatRate"
+                />
+                <label class="form-check-label" for="flatRate">
+                  Rate - 35,000 VNĐ
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="checkout-right-delivery p-3 border rounded-1 border-secondary border-2"
+      >
+        <h3 class="fs-5 fw-medium">Delivery Method</h3>
+        <img src="uploads/payment.png" alt="" />
+      </div>
+    </div>
+    <div class="checkout-left col-lg-8 wow fadeInRight col-md-12">
+      <form action="" class="needs-validation" name="orderForm" novalidate>
+        <!-- ng-submit="placeOrder()" -->
+        <div class="bill-info p-3 border rounded-1 border-secondary border-2">
+          <div class="row">
+            <h3 class="fs-5">Billing Information</h3>
+            <span class="fs-6 text-border-color">
+              Fill in the information to go to the next step.</span
+            >
+          </div>
+          <div class="row g-3 mt-3">
+            <div class="col-md-6 position-relative">
+              <label for="validationTooltip01" class="form-label fw-medium"
+                >First name</label
+              >
+              <input
+                ng-model="bill.firstName"
+                type="text"
+                class="form-control"
+                id="validationTooltip01"
+                name="firstName"
+                required
+              />
+
+              <span
+                class="text-dark fs-8"
+                ng-show="orderForm.firstName.$invalid"
+                >Please enter your first name.</span
+              >
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="validationTooltip02" class="form-label fw-medium"
+                >Last name</label
+              >
+              <input
+                type="text"
+                ng-model="bill.lastName"
+                class="form-control"
+                id="validationTooltip02"
+                name="lastName"
+                required
+              />
+              <span class="text-dark fs-8" ng-show="orderForm.lastName.$invalid"
+                >Please enter your last name.</span
+              >
+            </div>
+            <div class="col-md-12 position-relative">
+              <label for="email" class="form-label fw-medium">Email</label>
+              <div class="input-group has-validation">
+                <input
+                  ng-model="bill.email"
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  aria-describedby="validationTooltipUsernamePrepend"
+                  required
+                  name="email"
+                />
+              </div>
+              <span
+                class="text-dark fs-8"
+                ng-show="orderForm.email.$error.required && orderForm.email.$dirty"
+              >
+                Please enter your email
+              </span>
+              <span
+                class="text-dark fs-8"
+                ng-show="orderForm.email.$error.email && orderForm.email.$dirty"
+              >
+                Please enter a valid email address
+              </span>
+            </div>
+            <div class="col-md-12 position-relative">
+              <label for="Address" class="form-label fw-medium">Address</label>
+              <div class="input-group has-validation">
+                <input
+                  ng-model="bill.address"
+                  type="text"
+                  class="form-control"
+                  id="Address"
+                  aria-describedby="validationTooltipUsernamePrepend"
+                  required
+                  name="address"
+                />
+              </div>
+              <span class="text-dark fs-8" ng-show="orderForm.address.$invalid"
+                >Please enter your address</span
+              >
+            </div>
+            <div class="col-md-12 position-relative">
+              <label for="Address" class="form-label fw-medium">Tỉnh</label>
+              <div class="input-group has-validation">
+                <select
+                  ng-model="tinh"
+                  ng-options="tinh.Name for tinh in dsTinh"
+                  type="text"
+                  class="form-control"
+                  id="Tinh"
+                  aria-describedby="validationTooltipUsernamePrepend"
+                  required
+                  name="tinh"
+                  ng-change="updateTinhName(tinh)"
+                ></select>
+              </div>
+              <span class="text-dark fs-8" ng-show="orderForm.tinh.$invalid"
+                >Please enter your tinh</span
+              >
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="validationTooltip03" class="form-label fw-medium"
+                >Huyện</label
+              >
+              <select
+                ng-model="huyen"
+                ng-options="huyen.Name for huyen in tinh.Districts"
+                type="text"
+                class="form-control"
+                id="validationTooltip03"
+                required
+                name="huyen"
+                ng-change="updateHuyenName(huyen)"
+              ></select>
+              <span class="text-dark fs-8" ng-show="orderForm.huyen.$invalid"
+                >Please enter your Huyen</span
+              >
+            </div>
+
+            <div class="col-md-6 position-relative">
+              <label for="validationTooltip05" class="form-label fw-medium"
+                >Zip</label
+              >
+              <input
+                ng-model="bill.zip"
+                type="text"
+                class="form-control"
+                id="validationTooltip05"
+              />
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="country" class="form-label fw-medium">Xã</label>
+              <select
+                ng-model="phuong"
+                ng-options="phuong.Name for phuong in huyen.Wards"
+                type="text"
+                class="form-control"
+                id="country"
+                name="xa"
+                required
+                ng-change="updatePhuongName(phuong)"
+              ></select>
+              <span class="text-dark fs-8" ng-show="orderForm.xa.$invalid"
+                >Please enter your Xa</span
+              >
+            </div>
+            <div class="col-md-6 position-relative">
+              <label for="number" class="form-label fw-medium"
+                >Phonenumber</label
+              >
+              <input
+                ng-model="bill.phoneNumber"
+                type="number"
+                class="form-control"
+                id="number"
+                required
+                name="numberphone"
+              />
+              <span
+                class="text-dark fs-8"
+                ng-show="orderForm.numberphone.$invalid"
+                >Please enter your phone number</span
+              >
+            </div>
+            <div class="col-md-12 mt-3">
+              <label for="floatingTextarea2" class="fw-medium">Comments</label>
+              <textarea
+                ng-model="bill.note"
+                class="form-control mt-3"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2"
+                style="height: 100px"
+              ></textarea>
+            </div>
+            <div class="col-12 mt-3">
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                    >
+                      Other recipient information
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseOne"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body row">
+                      <div class="col-md-12s position-relative">
+                        <label
+                          for="validationTooltip01"
+                          class="form-label fw-medium"
+                          >Fullname</label
+                        >
+                        <input
+                          ng-model="bill.fullnameRec"
+                          type="text"
+                          class="form-control"
+                          id="validationTooltip01"
+                        />
+                      </div>
+
+                      <div class="col-md-12 position-relative">
+                        <label for="Address" class="form-label fw-medium"
+                          >Tỉnh</label
+                        >
+                        <div class="input-group has-validation">
+                          <select
+                            ng-model="tinhRec"
+                            ng-options="tinh.Name for tinh in dsTinh"
+                            type="text"
+                            class="form-control"
+                            id="Address"
+                            aria-describedby="validationTooltipUsernamePrepend"
+                            ng-change="updateTinhRecName(tinhRec)"
+                          ></select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 position-relative">
+                        <label
+                          for="validationTooltip03"
+                          class="form-label fw-medium"
+                          >Huyện</label
+                        >
+                        <select
+                          ng-model="huyenRec"
+                          ng-options="huyen.Name for huyen in tinhRec.Districts"
+                          type="text"
+                          class="form-control"
+                          id="validationTooltip03"
+                          ng-change="updateHuyenRecName(huyenRec)"
+                        ></select>
+                      </div>
+
+                      <div class="col-md-6 position-relative">
+                        <label
+                          for="validationTooltip05"
+                          class="form-label fw-medium"
+                          >Zip</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="validationTooltip05"
+                        />
+                      </div>
+                      <div class="col-md-6 position-relative">
+                        <label for="country" class="form-label fw-medium"
+                          >Xã/Phường</label
+                        >
+                        <select
+                          ng-model="phuongRec"
+                          ng-options="phuong.Name for phuong in huyenRec.Wards"
+                          type="text"
+                          class="form-control"
+                          id="country"
+                          ng-change="updatePhuongRecName(phuongRec)"
+                        ></select>
+                      </div>
+                      <div class="col-md-6 position-relative">
+                        <label for="number" class="form-label fw-medium"
+                          >Phonenumber</label
+                        >
+                        <input
+                          ng-model="bill.phonenumberRec"
+                          type="number"
+                          class="form-control"
+                          id="number"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <button
+                data-bs-toggle="modal"
+                data-bs-target="#viewbill"
+                type="button"
+                class="btn btn-primary text-white fw-bolder mt-3"
+                ng-disabled="orderForm.$invalid"
+              >
+                Place Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER  -->
+<div
+  class="modal fade"
+  id="viewbill"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Bill Your Information
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="bill-content">
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 name"
+          >
+            Họ tên: {{bill.firstName}} {{bill.lastName}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 address"
+          >
+            Địa chỉ: {{ bill.address }}, {{ bill.tinh }}, {{ bill.huyen }}, {{
+            bill.phuong }}
+          </div>
+
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 email"
+          >
+            Email: {{bill.email}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 phone"
+          >
+            Phone: {{bill.phoneNumber}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 phone"
+          >
+            PhoneRec: {{bill.phonenumberRec}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 note"
+          >
+            Ghi chú: {{bill.note}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-name"
+          >
+            Họ tên người nhận: {{bill.fullnameRec}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-phone"
+          >
+            Số điện thoại người nhận: {{bill.phonenumberRec}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-address"
+          >
+            Địa chỉ nhận: {{bill.tinhRec}} . {{bill.huyenRec}} .
+            {{bill.phuongRec}}
+          </div>
+          <div
+            ng-repeat="item in cart"
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-address"
+          >
+            Sản phẩm: {{item.name}}x{{item.quantity}}
+          </div>
+          <div
+            class="text-dark border-bottom border-2 border-border-color mb-2 receiver-address"
+          >
+            Tổng tiền: {{totalAll() | number:0}} VNĐ
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- ng-click="placeOrder()" -->
+        <!-- <button type="button" class="btn btn-primary text-white fw-medium">
+          Xác nhận
+        </button> -->
+        <button class="truck-button">
+          <span class="default">Complete Order</span>
+          <span class="success" ng-click="placeOrder()">
+            Order Placed
+            <svg viewbox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg>
+          </span>
+          <div class="truck">
+            <div class="wheel"></div>
+            <div class="back"></div>
+            <div class="front"></div>
+            <div class="box"></div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.querySelectorAll(".truck-button").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      let box = button.querySelector(".box"),
+        truck = button.querySelector(".truck");
+      if (!button.classList.contains("done")) {
+        if (!button.classList.contains("animation")) {
+          button.classList.add("animation");
+          gsap.to(button, {
+            "--box-s": 1,
+            "--box-o": 1,
+            duration: 0.3,
+            delay: 0.5,
+          });
+          gsap.to(box, {
+            x: 0,
+            duration: 0.4,
+            delay: 0.7,
+          });
+          gsap.to(button, {
+            "--hx": -5,
+            "--bx": 50,
+            duration: 0.18,
+            delay: 0.92,
+          });
+          gsap.to(box, {
+            y: 0,
+            duration: 0.1,
+            delay: 1.15,
+          });
+          gsap.set(button, {
+            "--truck-y": 0,
+            "--truck-y-n": -26,
+          });
+          gsap.to(button, {
+            "--truck-y": 1,
+            "--truck-y-n": -25,
+            duration: 0.2,
+            delay: 1.25,
+            onComplete() {
+              gsap
+                .timeline({
+                  onComplete() {
+                    button.classList.add("done");
+                  },
+                })
+                .to(truck, {
+                  x: 0,
+                  duration: 0.4,
+                })
+                .to(truck, {
+                  x: 40,
+                  duration: 1,
+                })
+                .to(truck, {
+                  x: 20,
+                  duration: 0.6,
+                })
+                .to(truck, {
+                  x: 96,
+                  duration: 0.4,
+                });
+              gsap.to(button, {
+                "--progress": 1,
+                duration: 2.4,
+                ease: "power2.in",
+              });
+            },
+          });
+        }
+      } else {
+        button.classList.remove("animation", "done");
+        gsap.set(truck, {
+          x: 4,
+        });
+        gsap.set(button, {
+          "--progress": 0,
+          "--hx": 0,
+          "--bx": 0,
+          "--box-s": 0.5,
+          "--box-o": 0,
+          "--truck-y": 0,
+          "--truck-y-n": -26,
+        });
+        gsap.set(box, {
+          x: -24,
+          y: -6,
+        });
+      }
+    });
+  });
+</script>

@@ -1,0 +1,123 @@
+// .page-header {
+//   margin-left: 280px;
+//   width: calc(100% - 280px);
+// }
+// .admin-sidebar {
+//   width: 280px;
+// }
+// .admin-form-group::before {
+//   content: "Search";
+//   position: absolute;
+//   top: 0%;
+//   right: 0;
+//   z-index: 1;
+//   cursor: pointer;
+//   font-size: 1.2rem;
+//   color: $white;
+//   background-color: $primary;
+//   padding: 7px 10px;
+//   border-radius: 0 5px 5px 0;
+// }
+// .admin-sidebar-logo {
+//   height: 70px;
+// }
+// .admin-sidebar-nav {
+//   min-height: calc(100vh - 70px);
+// }
+// .admin-content-main {
+//   min-height: calc(100vh - 70px);
+//   margin-top: 90px;
+//   margin-left: 280px;
+//   // margin-left: 280px;
+//   // width: calc(100% -270px);
+// }
+// .admin-footer {
+//   width: calc(100vw - 280px);
+//   height: 70px;
+// }
+.active-navbar {
+  background-color: $secondary !important;
+}
+#page-container {
+  min-width: 320px;
+  min-height: 100vh;
+}
+#page-header {
+  min-width: 320px;
+  max-width: 100%;
+}
+#main-container {
+  flex: 1 0 auto;
+  max-width: 100%;
+}
+#footer {
+  min-height: 4.375rem;
+}
+.side-header-content,
+.page-header-content {
+  height: 4.25rem;
+}
+#sidebar {
+  transform: translateX(-100%) translateY(0) translateZ(0);
+}
+.hover-item {
+  background-color: $white;
+  transition: all 0.2s linear;
+}
+.hover-item:hover {
+  background-color: $secondary;
+  transition: all 0.2s linear;
+}
+#page-header.page-header-content {
+  max-width: 1920px !important;
+}
+.admin-main-content {
+  max-width: 1920px;
+}
+#main-container,
+#admin-footer {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .d-lg-none {
+    display: none !important;
+  }
+  .sidebar-o #sidebar {
+    transform: translateX(0) translateY(0) translateZ(0);
+  }
+  .side-trans-enable #sidebar {
+    transition: transform 0.45s cubic-bezier(0.2, 0.61, 0.42, 0.97);
+  }
+  #sidebar {
+    width: 250px !important;
+  }
+  .w-250 {
+    width: 250px !important;
+  }
+  #page-header {
+    padding-left: 250px !important;
+  }
+
+  .admin-main-content {
+    width: 100%;
+    overflow-x: visible;
+  }
+  #main-container,
+  #admin-footer {
+    width: calc(100% - 250px);
+  }
+}
+@media (min-width: 1200px) {
+  .page-header-content {
+    width: 100%;
+  }
+}
+.dashboard-list {
+  transform: translateY(0);
+  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.dashboard-list:hover {
+  transform: translateY(-5px);
+  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}

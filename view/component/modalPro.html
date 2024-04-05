@@ -1,0 +1,127 @@
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+  ng-show="isModalOpen"
+>
+  <div class="custom-modal-width modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header p-0 pt-3 pe-3 border-0">
+        <button
+          ng-click="closeModal()"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body p-3 pt-0 p-0">
+        <div class="row">
+          <div class="col-md-5 col-sm-12 col-xs-12">
+            <div class="modal-img rounded-2 overflow-hidden">
+              <img
+                src="../uploads/technology/{{selectedProduct.img}}"
+                alt=""
+                class="img-cover"
+              />
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-12 col-xs-12">
+            <div class="modal-right">
+              <h2 class="modal-product-name fs-6 fw-bolder">
+                {{selectedProduct.name}}
+              </h2>
+              <span class="modal-product-des text-border-color">
+                {{selectedProduct.des}}</span
+              >
+              <div
+                class="modal-review border-top border-2 mt-2 pt-2 d-flex gap-2 align-items-center"
+              >
+                <div class="star fs-5 text-warning">
+                  <ion-icon name="star"></ion-icon
+                  ><ion-icon name="star"></ion-icon
+                  ><ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star-half"></ion-icon>
+                </div>
+                <span class="fw-medium text-border-color">( 75 Review )</span>
+              </div>
+              <div class="deatail-list">
+                <ul class="list-group w-50 my-2 gap-3">
+                  <li
+                    class="list-group-item border-0 d-flex justify-content-between p-0"
+                  >
+                    <label class="fw-bolder" for=""
+                      >Brand <span>:</span>
+                    </label>
+                    {{selectedProduct.brand | uppercase}}
+                  </li>
+                  <li
+                    class="list-group-item border-0 d-flex justify-content-between p-0"
+                  >
+                    <label class="fw-bolder" for=""
+                      >Category <span>:</span>
+                    </label>
+                    {{selectedProduct.category}}
+                  </li>
+                </ul>
+              </div>
+              <div class="modal-product-price d-flex gap-3 align-items-end">
+                <span class="modal-price-old fs-4 fw-bolder text-primary"
+                  >{{selectedProduct.pricenew | number: 0 }}VNĐ</span
+                >
+                <del class="modal-price-new fs-5 text-border-color"
+                  >{{selectedProduct.priceold | number: 0 }}VNĐ</del
+                >
+              </div>
+              <div class="modal-addcart d-flex gap-4 mt-4">
+                <div class="modal-quatity d-flex gap-2">
+                  <input
+                    type="text"
+                    name=""
+                    minlength="1"
+                    maxlength="20"
+                    ng-model="quantity"
+                    value="1"
+                    id=""
+                    class="quatity text-center border-1 border-border-color rounded-2 px-2"
+                  />
+                  <div
+                    class="modal-btn-add-del d-flex flex-column justify-content-between"
+                  >
+                    <button
+                      ng-click="plusQuantitymodal()"
+                      type="submit"
+                      class="plus border border-border-color rounded-2 d-flex align-items-center justify-content-center"
+                      id="modal-add"
+                    >
+                      <ion-icon name="add"></ion-icon>
+                    </button>
+                    <button
+                      ng-click="minusQuantitymodal()"
+                      type="submit"
+                      class="minus border border-border-color rounded-2 d-flex align-items-center justify-content-center"
+                      id="modal-remove"
+                    >
+                      <ion-icon name="remove"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary text-white fw-bolder"
+                  ng-click="addCartFromModal(selectedProduct, quantity)"
+                >
+                  Add To Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

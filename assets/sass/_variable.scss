@@ -1,0 +1,84 @@
+@import "../../node_modules/bootstrap/scss/_functions";
+@import "../../node_modules/bootstrap/scss/_variables";
+
+$primary: #64b496;
+$secondary: #e4f2ed;
+$third: #f7f7f7;
+$success: #198754;
+$info: #0d6efd;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f7f7f8;
+$dark: #2b2b2d;
+$border: #7a7a7a;
+// Tùy chỉnh màu khác
+$custom-color: #900;
+// Cập nhật biến màu chính của Bootstrap
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "third": $third,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+  "border-color": $border,
+);
+// Kết hợp các biến tùy chỉnh với các biến Bootstrap
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    "custom-color": $custom-color,
+  )
+);
+.custom-text-color {
+  color: $custom-color;
+}
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 4,
+  7: $spacer * 4.5,
+  11: $spacer * 11,
+);
+$h8-font-size: $font-size-base * 0.8;
+$font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size,
+  8: $h8-font-size,
+);
+$position-values: (
+  0: 0,
+  5: 5%,
+  10: 10%,
+  15: 15%,
+  20: 20%,
+  25: 25%,
+  30: 30%,
+  35: 35%,
+  50: 50%,
+  100: 100%,
+);
+$zindex-levels: (
+  n1: -1,
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
