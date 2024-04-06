@@ -109,10 +109,20 @@
 <section class="account-header container mt-7">
   <div class="account-profile">
     <div class="account-profile-img overflow-hidden">
-      <img src="uploads/account.JPG" alt="" class="rounded-circle img-cover" />
+      <img
+        ng-if="currentUserGoogle"
+        src="{{currentUserGoogle.photoURL}}"
+        alt=""
+        class="rounded-circle img-cover"
+      />
+    </div>
+    <div ng-if="!currentUserGoogle" class="account-profile-img overflow-hidden">
+      <img src="../uploads/user.jpg" alt="" class="rounded-circle img-cover" />
     </div>
     <div class="account-profile-info mt-1">
-      <h2 class="name fs-5">Hoang Thong nè!</h2>
+      <h2 class="name fs-5">
+        {{currentUser.name}}{{currentUserGoogle.displayName}}
+      </h2>
       <span class="date fs-6 text-border-color"
         >Carrot Member Since Sep 2022</span
       >
@@ -175,7 +185,7 @@
           <tbody>
             <tr
               ng-repeat="item in bills"
-              ng-if="item.userId === currentUser.id"
+              ng-if="item.userUId === currentUserGoogle.uid"
             >
               <th scope="row"><code>#{{ item.id }}</code></th>
               <td><span>{{ item.date }}</span></td>
@@ -190,6 +200,7 @@
                 ></ion-icon>
               </td>
             </tr>
+
             <!-- Trường hợp không có userid -->
             <!-- <tr ng-if="!currentUser">
               <th scope="row"><code>#{{bills[0].id}}</code></th>

@@ -141,7 +141,7 @@
             Add To Cart
           </button>
 
-          <ion-icon
+          <!-- <ion-icon
             class="p-2 rounded-1 fs-5 hover-tag border border-secondary cursor"
             name="eye-outline"
             data-bs-toggle="modal"
@@ -150,9 +150,11 @@
             data-bs-target="#staticBackdrop"
           ></ion-icon>
           <ion-icon
+            ng-class="{'active-wishlist': isWishlistActive(product)}"
+            ng-click="wishlist(product)"
             class="hover-tag p-2 rounded-1 fs-5 border border-secondary cursor"
             name="heart-outline"
-          ></ion-icon>
+          ></ion-icon> -->
         </div>
       </div>
     </div>
@@ -479,7 +481,7 @@
   </div>
 </div>
 <!-- PRODUCT POPULAR  -->
-<div class="popular-detail">
+<!-- <div class="popular-detail">
   <div class="container">
     <div
       class="section-header d-flex justify-content-center flex-column align-items-center mb-3"
@@ -493,18 +495,22 @@
   </div>
   <div class="container">
     <div class="row g-3">
-      <div class="col-xxl-3 col-lg-3 col-xl-4 col-6 wow fadeInUp">
+      <div
+        ng-repeat="product in products | filter : filterHotProduct"
+        class="col-xxl-3 col-xl-4 col-6 wow fadeInUp"
+      >
         <div
           class="position-relative card-product cursor card p-3 border border-2 bg-white border-light rounded-3 shadow-sm"
         >
           <div class="card-header border-0 h-60 position-relative">
             <img
-              src="uploads/product1.jpg"
+              src="./uploads/technology/{{product.img}}"
               alt=""
-              class="img-cover border border-2 border-light rounded-3"
+              class="border border-2 border-light rounded-3 w-100"
             />
             <div class="card-side-view position-absolute translate-middle">
               <ion-icon
+                ng-click="openModal(product)"
                 class="p-2 rounded-5 bg-white border cursor"
                 name="eye-outline"
                 data-bs-toggle="modal"
@@ -513,7 +519,9 @@
                 data-bs-target="#staticBackdrop"
               ></ion-icon>
               <ion-icon
-                class="p-2 rounded-5 bg-white border cursor"
+                ng-class="{'active-wishlist': isWishlistActive(product)}"
+                ng-click="wishlist(product)"
+                class="p-2 rounded-5 bg-white-wishlist border cursor"
                 name="heart-outline"
               ></ion-icon>
             </div>
@@ -521,193 +529,47 @@
               class="add-to-cart position-absolute top-100 start-50 translate-middle"
             >
               <ion-icon
+                ng-click="addCart(product)"
                 class="p-2 rounded-5 bg-third text-primary border"
                 name="cart-outline"
               ></ion-icon>
             </div>
           </div>
-          <div class="product-sale position-absolute">
+          <div ng-if="product.isSale" class="product-sale position-absolute">
             <span
               class="text-sale py-1 px-4 rounded-2 text-white fw-bolder bg-primary"
               >Sale</span
             >
           </div>
           <div class="card-body p-0 pt-3 border-0 text-center">
-            <h3 class="product-category fs-8 text-border-color">Vegetable</h3>
-            <span class="product-name hover-list fs-6 fw-medium"
-              >Fresh organic villa farm lomon 500gm pack</span
+            <h3 class="product-category fs-8 text-border-color">
+              {{product.categoryName}}
+            </h3>
+            <a
+              href="#!detail/{{product.id}}"
+              class="text-dark text-decoration-none"
             >
+              <span class="product-name hover-list fs-6 fw-medium"
+                >{{product.name}}</span
+              >
+            </a>
             <div
               class="product-price d-flex gap-2 justify-content-center fs-6 pt-2 align-items-center"
             >
-              <span class="price-new fw-bold text-primary"
-                >$ <span>120.25</span></span
-              >
-              <del class="price-old text-border-color fw-normal"
-                >$ <span>123.25</span></del
-              >
-            </div>
-          </div>
-        </div>
-      </div>
+              <span class="price-new fw-bold text-primary">
+                <span>{{product.pricenew | number: 0 }}VNĐ</span>
+              </span>
 
-      <div class="col-xxl-3 col-lg-3 col-xl-4 col-6 wow fadeInUp">
-        <div
-          class="position-relative card-product cursor card p-3 border border-2 bg-white border-light rounded-3 shadow-sm"
-        >
-          <div class="card-header border-0 h-60 position-relative">
-            <img
-              src="uploads/product2.jpg"
-              alt=""
-              class="img-cover border border-2 border-light rounded-3"
-            />
-            <div class="card-side-view position-absolute translate-middle">
-              <ion-icon
-                class="p-2 rounded-5 bg-white border cursor"
-                name="eye-outline"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-              ></ion-icon>
-              <ion-icon
-                class="p-2 rounded-5 bg-white border cursor"
-                name="heart-outline"
-              ></ion-icon>
-            </div>
-            <div
-              class="add-to-cart position-absolute top-100 start-50 translate-middle"
-            >
-              <ion-icon
-                class="p-2 rounded-5 bg-third text-primary border"
-                name="cart-outline"
-              ></ion-icon>
-            </div>
-          </div>
-
-          <div class="card-body p-0 pt-3 border-0 text-center">
-            <h3 class="product-category fs-8 text-border-color">Vegetable</h3>
-            <span class="product-name hover-list fs-6 fw-medium"
-              >Fresh organic villa farm lomon 500gm pack</span
-            >
-            <div
-              class="product-price d-flex gap-2 justify-content-center fs-6 pt-2 align-items-center"
-            >
-              <span class="price-new fw-bold text-primary"
-                >$ <span>120.25</span></span
-              >
-              <del class="price-old text-border-color fw-normal"
-                >$ <span>123.25</span></del
+              <del class="price-old text-border-color fw-normal">
+                <span>{{product.priceold | number: 0 }}VNĐ</span></del
               >
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-xxl-3 col-lg-3 col-xl-4 col-6 wow fadeInUp">
-        <div
-          class="position-relative card-product cursor card p-3 border border-2 bg-white border-light rounded-3 shadow-sm"
-        >
-          <div class="card-header border-0 h-60 position-relative">
-            <img
-              src="uploads/product3.jpg"
-              alt=""
-              class="img-cover border border-2 border-light rounded-3"
-            />
-            <div class="card-side-view position-absolute translate-middle">
-              <ion-icon
-                class="p-2 rounded-5 bg-white border cursor"
-                name="eye-outline"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-              ></ion-icon>
-              <ion-icon
-                class="p-2 rounded-5 bg-white border cursor"
-                name="heart-outline"
-              ></ion-icon>
-            </div>
-            <div
-              class="add-to-cart position-absolute top-100 start-50 translate-middle"
-            >
-              <ion-icon
-                class="p-2 rounded-5 bg-third text-primary border"
-                name="cart-outline"
-              ></ion-icon>
-            </div>
-          </div>
-          <div class="product-sale position-absolute">
-            <span
-              class="text-sale py-1 px-4 rounded-2 text-white fw-bolder bg-primary"
-              >Sale</span
-            >
-          </div>
-          <div class="card-body p-0 pt-3 border-0 text-center">
-            <h3 class="product-category fs-8 text-border-color">Vegetable</h3>
-            <span class="product-name hover-list fs-6 fw-medium"
-              >Fresh organic villa farm lomon 500gm pack</span
-            >
-            <div
-              class="product-price d-flex gap-2 justify-content-center fs-6 pt-2 align-items-center"
-            >
-              <span class="price-new fw-bold text-primary"
-                >$ <span>120.25</span></span
-              >
-              <del class="price-old text-border-color fw-normal"
-                >$ <span>123.25</span></del
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xxl-3 col-lg-3 col-xl-4 col-6 wow fadeInUp">
-        <div
-          class="position-relative card-product cursor card p-3 border border-2 bg-white border-light rounded-3 shadow-sm"
-        >
-          <div class="card-header border-0 h-60 position-relative">
-            <img
-              src="uploads/product4.jpg"
-              alt=""
-              class="img-cover border border-2 border-light rounded-3"
-            />
-            <div class="card-side-view position-absolute translate-middle">
-              <ion-icon
-                class="p-2 rounded-5 bg-white border cursor"
-                name="eye-outline"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-              ></ion-icon>
-              <ion-icon
-                class="p-2 rounded-5 bg-white border cursor"
-                name="heart-outline"
-              ></ion-icon>
-            </div>
-            <div
-              class="add-to-cart position-absolute top-100 start-50 translate-middle"
-            >
-              <ion-icon
-                class="p-2 rounded-5 bg-third text-primary border"
-                name="cart-outline"
-              ></ion-icon>
-            </div>
-          </div>
-          <div class="card-body p-0 pt-3 border-0 text-center">
-            <h3 class="product-category fs-8 text-border-color">Vegetable</h3>
-            <span class="product-name hover-list fs-6 fw-medium"
-              >Fresh organic villa farm lomon 500gm pack</span
-            >
-            <div
-              class="product-price d-flex gap-2 justify-content-center fs-6 pt-2 align-items-center"
-            >
-              <span class="price-new fw-bold text-primary"
-                >$ <span>120.25</span></span
-              >
-              <del class="price-old text-border-color fw-normal"
-                >$ <span>123.25</span></del
-              >
-            </div>
-          </div>
-        </div>
-      </div>
+      </div> 
     </div>
   </div>
-</div>
+</div> -->
 <!-- FOOTER  -->
 <script>
   $(document).ready(function () {

@@ -123,7 +123,7 @@
       class="header-top-main align-items-center justify-content-between py-3"
     >
       <a href="#">
-        <img src="uploads/logo.png" alt="" class="logo-img logo" width="40" />
+        <img src="uploads/logoo.png" alt="" class="logo-img logo" width="40" />
       </a>
 
       <div
@@ -141,7 +141,10 @@
         </div>
         <ul class="navbar-nav">
           <!-- CÓ USER -->
-          <li class="nav-item dropdown hover-list" ng-if="currentUser">
+          <li
+            class="nav-item dropdown hover-list"
+            ng-if="currentUser || currentUserGoogle"
+          >
             <a
               class="account nav-link d-flex align-items-center gap-2"
               href="#"
@@ -150,13 +153,25 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <ion-icon class="fs-4" name="person-outline"></ion-icon>
+              <ion-icon
+                ng-if="!currentUserGoogle"
+                class="fs-4"
+                name="person-outline"
+              ></ion-icon>
+              <img
+                ng-if="currentUserGoogle"
+                class="rounded-circle"
+                src="{{currentUserGoogle.photoURL}}"
+                alt=""
+                width="25"
+                height="25"
+              />
               <span>Account</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
                 <a class="dropdown-item" href="#!signup"
-                  >{{currentUser.name}}</a
+                  >{{currentUser.name}}{{currentUserGoogle.displayName}}</a
                 >
               </li>
               <li>
@@ -175,7 +190,10 @@
             </ul>
           </li>
           <!-- KHONG CÓ USER -->
-          <li class="nav-item dropdown hover-list" ng-if="!currentUser">
+          <li
+            class="nav-item dropdown hover-list"
+            ng-if="!currentUser && !currentUserGoogle"
+          >
             <a
               class="account nav-link d-flex align-items-center gap-2"
               href="#"

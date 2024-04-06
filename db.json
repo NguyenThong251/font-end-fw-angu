@@ -41,7 +41,7 @@
       "img": "banphim1.jpg",
       "category": 1,
       "view": 500,
-      "hot": true,
+      "hot": false,
       "thumbnail": [
         "banphim1.jpg",
         "banphim1.1.jpg",
@@ -62,7 +62,7 @@
       "img": "banphim2.jpg",
       "category": 1,
       "view": 500,
-      "hot": true,
+      "hot": false,
       "thumbnail": [
         "banphim2.jpg",
         "banphim2.1.jpg",
@@ -84,11 +84,7 @@
       "category": 1,
       "view": 500,
       "hot": true,
-      "thumbnail": [
-        "banphim3.jpg",
-        "banphim3.1.jpg",
-        "banphim3.2.jpg"
-      ],
+      "thumbnail": ["banphim3.jpg", "banphim3.1.jpg", "banphim3.2.jpg"],
       "des": "Description for Bàn phím 3",
       "dateCreate": "2022-01-03"
     },
@@ -125,11 +121,7 @@
       "category": 1,
       "view": 500,
       "hot": true,
-      "thumbnail": [
-        "banphim5.jpg",
-        "banphim5.1.jpg",
-        "banphim5.2.jpg"
-      ],
+      "thumbnail": ["banphim5.jpg", "banphim5.1.jpg", "banphim5.2.jpg"],
       "des": "Description for Bàn phím 5",
       "dateCreate": "2022-01-05"
     },
@@ -511,11 +503,7 @@
       "category": 3,
       "view": 500,
       "hot": true,
-      "thumbnail": [
-        "tainghe3.webp",
-        "tainghe3.1.webp",
-        "tainghe3.2.webp"
-      ],
+      "thumbnail": ["tainghe3.webp", "tainghe3.1.webp", "tainghe3.2.webp"],
       "des": "Description for Tai nghe vip 3",
       "dateCreate": "2022-01-3"
     },
@@ -531,11 +519,7 @@
       "category": 3,
       "view": 500,
       "hot": true,
-      "thumbnail": [
-        "tainghe4.webp",
-        "tainghe4.1.webp",
-        "tainghe4.2.webp"
-      ],
+      "thumbnail": ["tainghe4.webp", "tainghe4.1.webp", "tainghe4.2.webp"],
       "des": "Description for Tai nghe vip 4",
       "dateCreate": "2022-01-4"
     },
@@ -630,35 +614,35 @@
     {
       "id": "1",
       "name": "Nguyen Hoang Thong",
-      "img": "1.jpg",
+      "img": "user.jpg",
       "comment": "Sản phẩm đẹp quá chừng !",
       "rate": ""
     },
     {
       "id": "2",
       "name": "Nguyen Thị Kim Phương",
-      "img": "2.jpg",
+      "img": "user.jpg",
       "comment": "Sài quá ngon mấy ní ơi",
       "rate": ""
     },
     {
       "id": "3",
       "name": "Nguyen Thị Ngọc Hân",
-      "img": "3.jpg",
+      "img": "user.jpg",
       "comment": "Sài thích vãi cl Diễm ơi",
       "rate": ""
     },
     {
       "id": "4",
       "name": "Anh Ba Teo",
-      "img": "1.jpg",
+      "img": "user.jpg",
       "comment": "Sài quá ngon mấy ní ơi",
       "rate": ""
     },
     {
       "id": "5",
       "name": "Anh Ba Khia",
-      "img": "3.jpg",
+      "img": "user.jpg",
       "comment": "Sài thích vãi cl Diễm ơi",
       "rate": ""
     },
@@ -705,6 +689,8 @@
   "role": [
     {
       "id": "1",
+      "email": "ht01252004@gmail.com",
+      "password": "12345678Tt@",
       "position": "Giám đốc",
       "name": "Anh tư sầu đời",
       "img": "1.jpg"
@@ -1141,6 +1127,34 @@
       "cartItems": [
         {
           "name": "Bàn phím 3 C",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "6c8e",
+      "userId": null,
+      "userUId": "9CIw6yoQo7SEKipTTihkEBJDPnv2",
+      "firstName": "Nguyễn Hoàng",
+      "lastName": "Thông",
+      "email": "ht01252004@gmail.com",
+      "address": "18",
+      "tinh": "Tỉnh Phú Thọ",
+      "huyen": "Huyện Thanh Ba",
+      "phuong": "Xã Thanh Hà",
+      "zip": "85000",
+      "phoneNumber": 868412519,
+      "fullnameRec": "",
+      "tinhRec": "",
+      "huyenRec": "",
+      "phuongRec": "",
+      "phonenumberRec": "",
+      "date": "2024-04-06T10:31:49.000Z",
+      "note": "",
+      "totalAmount": 1035000,
+      "cartItems": [
+        {
+          "name": "Bàn phím 2 B",
           "quantity": 1
         }
       ]

@@ -142,18 +142,3 @@ ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
   console.error(error);
 });
 //
-// ANGULAR JS
-var app = angular.module("myApp", ["ngRoute", "ngCookies"]);
-app.config(function ($routeProvider) {
-  $routeProvider
-    .when("/admin", {
-      templateUrl: "admin/admin.html?" + Math.random(),
-      // controller: "homeCtrl",
-    })
-    // .otherwise({
-    //   rediRectTo: "/",
-    // });
-    .otherwise({
-      templateUrl: "view/404.html",
-    });
-});

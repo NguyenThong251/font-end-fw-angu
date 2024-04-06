@@ -1,0 +1,273 @@
+<div class="sidebar-header bg-primary">
+  <div
+    class="side-header-content px-3 w-250 d-flex justify-content-between align-items-center"
+  >
+    <a href="" class="sidebar-header-logo">
+      <img src="uploads/logo.png" alt="" width="100px" />
+    </a>
+    <div class="sidebar-header-btn d-flex align-items-center gap-2">
+      <button
+        type="button"
+        class="d-lg-none p-1 bg-secondary border-third d-flex align-items-center justify-content-center border border-2 rounded-2"
+      >
+        <ion-icon class="text-primary fs-6" name="close"></ion-icon>
+      </button>
+      <button
+        type="button"
+        class="p-1 bg-secondary border-third d-flex align-items-center justify-content-center border border-2 rounded-2"
+      >
+        <ion-icon class="text-primary fs-6" name="moon-outline"></ion-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<ul class="side-nav p-3 d-flex flex-column gap-2 overflow-y">
+  <li class="side-nav-item list-group-item">
+    <div
+      class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center cursor hover-item active-navbar"
+    >
+      <ion-icon class="text-primary fs-5" name="rocket"></ion-icon>
+      <span class="fs-6 fw-medium">Dashboard</span>
+    </div>
+  </li>
+  <div class="accordion" id="accordionExample">
+    <li
+      class="side-nav-item list-group-item"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapseOne-category"
+      aria-expanded="false"
+      aria-controls="collapseOne-category"
+    >
+      <div
+        class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+      >
+        <ion-icon class="text-primary fs-5" name="list"></ion-icon>
+        <span class="fs-6 fw-medium">Category</span>
+      </div>
+      <div
+        id="collapseOne-category"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <ul class="gap-3 d-flex flex-column">
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href="#!category"
+              >
+                Category List</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href="#!addcategory"
+              >
+                Category Add</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li
+      class="side-nav-item list-group-item"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapseOne-product"
+      aria-expanded="false"
+      aria-controls="collapseOne-product"
+    >
+      <div
+        class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+      >
+        <ion-icon class="text-primary fs-5" name="layers"></ion-icon>
+        <span class="fs-6 fw-medium">Products</span>
+      </div>
+      <!-- Menu cấp 2 -->
+      <div
+        id="collapseOne-product"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <ul class="gap-3 d-flex flex-column">
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href="#!product"
+              >
+                Product List</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href="#!addproduct"
+              >
+                Product Add</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li
+      class="side-nav-item list-group-item"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapseOne-blog"
+      aria-expanded="false"
+      aria-controls="collapseOne-blog"
+    >
+      <div
+        class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+      >
+        <ion-icon class="text-primary fs-5" name="albums"></ion-icon>
+        <span class="fs-6 fw-medium">Blog</span>
+      </div>
+      <!-- Menu cấp 2 -->
+      <div
+        id="collapseOne-blog"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <ul class="gap-3 d-flex flex-column">
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href=""
+              >
+                Blog List</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href=""
+              >
+                Blog Add</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li
+      class="side-nav-item list-group-item"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapseOne-user"
+      aria-expanded="false"
+      aria-controls="collapseOne-user"
+    >
+      <div
+        class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+      >
+        <ion-icon class="text-primary fs-5" name="people"></ion-icon>
+        <span class="fs-6 fw-medium">User</span>
+      </div>
+      <!-- Menu cấp 2 -->
+      <div
+        id="collapseOne-user"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <ul class="gap-3 d-flex flex-column">
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href=""
+              >
+                User List</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href=""
+              >
+                User Add</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li
+      class="side-nav-item list-group-item"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapseOne-role"
+      aria-expanded="false"
+      aria-controls="collapseOne-role"
+    >
+      <div
+        class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+      >
+        <ion-icon class="text-primary fs-5" name="person"></ion-icon>
+        <span class="fs-6 fw-medium">Role</span>
+      </div>
+      <!-- Menu cấp 2 -->
+      <div
+        id="collapseOne-role"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <ul class="gap-3 d-flex flex-column">
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href=""
+              >
+                Role List</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href=""
+              >
+                Role Add</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </div>
+
+  <li class="side-nav-item list-group-item">
+    <div
+      class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+    >
+      <ion-icon class="text-primary fs-5" name="bag-handle"></ion-icon>
+      <span class="fs-6 fw-medium">Order</span>
+    </div>
+  </li>
+  <li class="side-nav-item list-group-item">
+    <div
+      class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+    >
+      <ion-icon class="text-primary fs-5" name="chatbox-ellipses"></ion-icon>
+      <span class="fs-6 fw-medium">Comment</span>
+    </div>
+  </li>
+
+  <li class="side-nav-item list-group-item">
+    <div
+      class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+    >
+      <ion-icon class="text-primary fs-5" name="settings"></ion-icon>
+      <span class="fs-6 fw-medium">Setting</span>
+    </div>
+  </li>
+  <li class="side-nav-item list-group-item">
+    <div
+      class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+    >
+      <ion-icon class="text-primary fs-5" name="log-out"></ion-icon>
+      <span class="fs-6 fw-medium">Logout</span>
+    </div>
+  </li>
+</ul>
