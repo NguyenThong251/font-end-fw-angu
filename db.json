@@ -2,8 +2,13 @@
   "voucher": [
     {
       "id": "1",
-      "code": "THONGDEPTRAI",
+      "code": "THONGNE",
       "pricesale": 100000
+    },
+    {
+      "id": "2",
+      "code": "THONGDEPTRAINHATZUTRU",
+      "pricesale": 200000
     }
   ],
   "category": [
@@ -84,7 +89,11 @@
       "category": 1,
       "view": 500,
       "hot": true,
-      "thumbnail": ["banphim3.jpg", "banphim3.1.jpg", "banphim3.2.jpg"],
+      "thumbnail": [
+        "banphim3.jpg",
+        "banphim3.1.jpg",
+        "banphim3.2.jpg"
+      ],
       "des": "Description for Bàn phím 3",
       "dateCreate": "2022-01-03"
     },
@@ -121,7 +130,11 @@
       "category": 1,
       "view": 500,
       "hot": true,
-      "thumbnail": ["banphim5.jpg", "banphim5.1.jpg", "banphim5.2.jpg"],
+      "thumbnail": [
+        "banphim5.jpg",
+        "banphim5.1.jpg",
+        "banphim5.2.jpg"
+      ],
       "des": "Description for Bàn phím 5",
       "dateCreate": "2022-01-05"
     },
@@ -503,7 +516,11 @@
       "category": 3,
       "view": 500,
       "hot": true,
-      "thumbnail": ["tainghe3.webp", "tainghe3.1.webp", "tainghe3.2.webp"],
+      "thumbnail": [
+        "tainghe3.webp",
+        "tainghe3.1.webp",
+        "tainghe3.2.webp"
+      ],
       "des": "Description for Tai nghe vip 3",
       "dateCreate": "2022-01-3"
     },
@@ -519,7 +536,11 @@
       "category": 3,
       "view": 500,
       "hot": true,
-      "thumbnail": ["tainghe4.webp", "tainghe4.1.webp", "tainghe4.2.webp"],
+      "thumbnail": [
+        "tainghe4.webp",
+        "tainghe4.1.webp",
+        "tainghe4.2.webp"
+      ],
       "des": "Description for Tai nghe vip 4",
       "dateCreate": "2022-01-4"
     },
@@ -608,6 +629,182 @@
       ],
       "des": "Description for Tai nghe vip 8",
       "dateCreate": "2022-01-8"
+    },
+    {
+      "id": "3e26",
+      "name": "",
+      "pricenew": "",
+      "brand": "",
+      "quantity": "",
+      "rate": 4,
+      "priceold": "",
+      "img": "",
+      "category": "",
+      "view": "",
+      "hot": "",
+      "thumbnail": [
+        "tainghe2.webp",
+        "tainghe2.1.webp",
+        "tainghe2.2.webp",
+        "tainghe2.3.webp",
+        "tainghe2.4.webp"
+      ],
+      "des": "Description for Tai nghe vip 2",
+      "dateCreate": "2022-01-2"
+    },
+    {
+      "id": "b00e",
+      "name": "",
+      "pricenew": "",
+      "brand": "",
+      "quantity": "",
+      "rate": 4,
+      "priceold": "",
+      "img": "",
+      "category": "",
+      "view": "",
+      "hot": "",
+      "thumbnail": [
+        "tainghe2.webp",
+        "tainghe2.1.webp",
+        "tainghe2.2.webp",
+        "tainghe2.3.webp",
+        "tainghe2.4.webp"
+      ],
+      "des": "Description for Tai nghe vip 2",
+      "dateCreate": "2022-01-2"
+    },
+    {
+      "id": "4e91",
+      "name": "",
+      "pricenew": "",
+      "brand": "",
+      "quantity": "",
+      "rate": 4,
+      "priceold": "",
+      "img": "",
+      "category": "",
+      "view": "",
+      "hot": "",
+      "thumbnail": [
+        "tainghe2.webp",
+        "tainghe2.1.webp",
+        "tainghe2.2.webp",
+        "tainghe2.3.webp",
+        "tainghe2.4.webp"
+      ],
+      "des": "Description for Tai nghe vip 2",
+      "dateCreate": "2022-01-2"
+    },
+    {
+      "id": "a2dc",
+      "name": "",
+      "pricenew": "",
+      "brand": "",
+      "quantity": "",
+      "rate": 4,
+      "priceold": "",
+      "img": "",
+      "category": "",
+      "view": "",
+      "hot": "",
+      "thumbnail": [
+        "tainghe2.webp",
+        "tainghe2.1.webp",
+        "tainghe2.2.webp",
+        "tainghe2.3.webp",
+        "tainghe2.4.webp"
+      ],
+      "des": "Description for Tai nghe vip 2",
+      "dateCreate": "2022-01-2"
+    },
+    {
+      "id": "e157",
+      "name": "",
+      "pricenew": "",
+      "brand": "",
+      "quantity": "",
+      "rate": 4,
+      "priceold": "",
+      "img": "",
+      "category": "",
+      "view": "",
+      "hot": "",
+      "thumbnail": [
+        "tainghe2.webp",
+        "tainghe2.1.webp",
+        "tainghe2.2.webp",
+        "tainghe2.3.webp",
+        "tainghe2.4.webp"
+      ],
+      "des": "Description for Tai nghe vip 2",
+      "dateCreate": "2022-01-2"
+    },
+    {
+      "id": "e95e",
+      "name": "",
+      "pricenew": "",
+      "brand": "",
+      "quantity": "",
+      "rate": 4,
+      "priceold": "",
+      "img": "",
+      "category": "",
+      "view": "",
+      "hot": "",
+      "thumbnail": [
+        "tainghe2.webp",
+        "tainghe2.1.webp",
+        "tainghe2.2.webp",
+        "tainghe2.3.webp",
+        "tainghe2.4.webp"
+      ],
+      "des": "Description for Tai nghe vip 2",
+      "dateCreate": "2022-01-2"
+    },
+    {
+      "id": "dede",
+      "name": "",
+      "pricenew": "",
+      "brand": "",
+      "quantity": "",
+      "rate": 4,
+      "priceold": "",
+      "img": "",
+      "category": "",
+      "view": "",
+      "hot": "",
+      "thumbnail": [
+        "tainghe2.webp",
+        "tainghe2.1.webp",
+        "tainghe2.2.webp",
+        "tainghe2.3.webp",
+        "tainghe2.4.webp"
+      ],
+      "des": "Description for Tai nghe vip 2",
+      "dateCreate": "2022-01-2"
+    },
+    {
+      "id": "70bb",
+      "name": "",
+      "pricenew": "",
+      "brand": "",
+      "quantity": "",
+      "rate": 4,
+      "priceold": "",
+      "img": "",
+      "category": "",
+      "view": "",
+      "hot": "",
+      "thumbnail": [
+        "tainghe2.webp",
+        "tainghe2.1.webp",
+        "tainghe2.2.webp",
+        "tainghe2.3.webp",
+        "tainghe2.4.webp"
+      ],
+      "des": "Description for Tai nghe vip 2",
+      "dateCreate": "2022-01-2"
     }
   ],
   "user": [
@@ -1158,6 +1355,88 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "id": "a773",
+      "userId": null,
+      "userUId": null,
+      "firstName": "Nguyễn Hoàng",
+      "lastName": "Thông",
+      "email": "mphuc6910@gmail.com",
+      "address": "18",
+      "tinh": "Thành phố Hồ Chí Minh",
+      "huyen": "Quận 12",
+      "phuong": "Phường Trung Mỹ Tây",
+      "zip": "85000",
+      "phoneNumber": 868412519,
+      "fullnameRec": "",
+      "tinhRec": "",
+      "huyenRec": "",
+      "phuongRec": "",
+      "phonenumberRec": "",
+      "date": "2024-04-07T03:35:53.000Z",
+      "note": "",
+      "totalAmount": 2035000,
+      "cartItems": [
+        {
+          "name": "Bàn phím 2 B",
+          "quantity": 1
+        },
+        {
+          "name": "Bàn phím 3 C",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "3fa5",
+      "userId": null,
+      "userUId": "FUicPrvdBHWTNrDkhFvPygbQkwa2",
+      "firstName": "Nguyễn Hoàng",
+      "lastName": "Thông",
+      "email": "ht01252004@gmail.com",
+      "address": "18",
+      "tinh": "Tỉnh Ninh Bình",
+      "huyen": "Thành phố Ninh Bình",
+      "phuong": "Phường Nam Bình",
+      "zip": "85000",
+      "phoneNumber": 868412519,
+      "fullnameRec": "Thay Cuong",
+      "tinhRec": "Tỉnh Quảng Ninh",
+      "huyenRec": "Huyện Hải Hà",
+      "phuongRec": "Xã Quảng Chính",
+      "phonenumberRec": 12345678,
+      "date": "2024-04-08T01:13:47.000Z",
+      "note": "",
+      "totalAmount": 8000000,
+      "cartItems": [
+        {
+          "name": "Bàn phím 1 A",
+          "quantity": 3
+        },
+        {
+          "name": "Tai nghe vip 5",
+          "quantity": 2
+        }
+      ]
+    }
+  ],
+  "brand": [
+    {
+      "id": "1",
+      "name": "Chuột"
+    },
+    {
+      "id": "2",
+      "name": "Bàn phím"
+    },
+    {
+      "id": "3",
+      "name": "Tay nghe"
+    },
+    {
+      "id": "4",
+      "name": "Laptop"
     }
   ]
 }

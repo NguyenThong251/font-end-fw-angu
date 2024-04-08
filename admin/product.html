@@ -26,160 +26,41 @@
         <thead>
           <tr>
             <th class="fw-semibold">Id</th>
+
             <th class="fw-semibold">Product Name</th>
+
             <th class="fw-semibold">Category</th>
             <th class="fw-semibold">Imgage</th>
+            <th class="fw-semibold">PriceNew</th>
+            <th class="fw-semibold">PriceOld</th>
+            <th class="fw-semibold">Brand</th>
             <th class="fw-semibold">Quatity</th>
-            <th class="fw-semibold">Price</th>
-            <th class="fw-semibold">Offer</th>
-            <th class="fw-semibold">Status</th>
+
             <th class="fw-semibold">Date</th>
-            <th class="fw-semibold">Treding</th>
+
             <th class="fw-semibold">Handle</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="align-middle">
-            <th>1</th>
-            <td>Banh so 1</td>
-            <td>Hat</td>
+          <tr class="align-middle" ng-repeat="product in products">
+            <th>{{product.id}}</th>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
             <td>
               <img
-                src="../uploads/product1.jpg"
+                src="../uploads/technology/{{product.img}}"
                 alt=""
                 width="80"
                 height="80"
                 class="border border-secondary rounded-2"
               />
             </td>
-            <td>200</td>
-            <td>200$</td>
-            <td>20%</td>
-            <td>Approved</td>
-            <td>25-01-2004</td>
-            <td>
-              <span class="badge text-bg-primary text-white">New</span>
-            </td>
-            <td>
-              <div class="handle-option d-flex align-items-center gap-2">
-                <ion-icon
-                  class="fs-5 text-primary cursor"
-                  name="eye-outline"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-info cursor"
-                  name="create-outline"
-                  data-bs-toggle="modal"
-                  data-bs-target="#categoryEdit"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-danger cursor"
-                  name="trash-outline"
-                ></ion-icon>
-              </div>
-            </td>
-          </tr>
-          <tr class="align-middle">
-            <th>1</th>
-            <td>Banh so 1</td>
-            <td>Hat</td>
-            <td>
-              <img
-                src="../uploads/product1.jpg"
-                alt=""
-                width="80"
-                height="80"
-                class="border border-secondary rounded-2"
-              />
-            </td>
-            <td>200</td>
-            <td>200$</td>
-            <td>20%</td>
-            <td>Approved</td>
-            <td>25-01-2004</td>
-            <td>
-              <span class="badge text-bg-primary text-white">New</span>
-            </td>
-            <td>
-              <div class="handle-option d-flex align-items-center gap-2">
-                <ion-icon
-                  class="fs-5 text-primary cursor"
-                  name="eye-outline"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-info cursor"
-                  name="create-outline"
-                  data-bs-toggle="modal"
-                  data-bs-target="#categoryEdit"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-danger cursor"
-                  name="trash-outline"
-                ></ion-icon>
-              </div>
-            </td>
-          </tr>
-          <tr class="align-middle">
-            <th>1</th>
-            <td>Banh so 1</td>
-            <td>Hat</td>
-            <td>
-              <img
-                src="../uploads/product1.jpg"
-                alt=""
-                width="80"
-                height="80"
-                class="border border-secondary rounded-2"
-              />
-            </td>
-            <td>200</td>
-            <td>200$</td>
-            <td>20%</td>
-            <td>Approved</td>
-            <td>25-01-2004</td>
-            <td>
-              <span class="badge text-bg-primary text-white">New</span>
-            </td>
-            <td>
-              <div class="handle-option d-flex align-items-center gap-2">
-                <ion-icon
-                  class="fs-5 text-primary cursor"
-                  name="eye-outline"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-info cursor"
-                  name="create-outline"
-                  data-bs-toggle="modal"
-                  data-bs-target="#categoryEdit"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-danger cursor"
-                  name="trash-outline"
-                ></ion-icon>
-              </div>
-            </td>
-          </tr>
-          <tr class="align-middle">
-            <th>1</th>
-            <td>Banh so 1</td>
-            <td>Hat</td>
-            <td>
-              <img
-                src="../uploads/product1.jpg"
-                alt=""
-                width="80"
-                height="80"
-                class="border border-secondary rounded-2"
-              />
-            </td>
-            <td>200</td>
-            <td>200$</td>
-            <td>20%</td>
-            <td>Approved</td>
-            <td>25-01-2004</td>
-            <td>
-              <span class="badge text-bg-primary text-white">New</span>
-            </td>
+            <td>{{product.pricenew | number : 0}} VNĐ</td>
+            <td>{{product.pricenew | number : 0}} VNĐ</td>
+            <td>{{product.brand}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.date}}</td>
+
             <td>
               <div class="handle-option d-flex align-items-center gap-2">
                 <ion-icon

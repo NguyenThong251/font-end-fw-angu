@@ -73,10 +73,8 @@
     </li>
     <li
       class="side-nav-item list-group-item"
-      data-bs-toggle="collapse"
-      data-bs-target="#collapseOne-product"
-      aria-expanded="false"
-      aria-controls="collapseOne-product"
+      ng-click="toggleCollapse()"
+      ng-class="{ 'active': isCollapsed }"
     >
       <div
         class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
@@ -85,10 +83,10 @@
         <span class="fs-6 fw-medium">Products</span>
       </div>
       <!-- Menu cấp 2 -->
+      <!-- id="collapseOne-product" -->
       <div
-        id="collapseOne-product"
         class="accordion-collapse collapse"
-        data-bs-parent="#accordionExample"
+        ng-class="{ 'show': isCollapsed }"
       >
         <div class="accordion-body">
           <ul class="gap-3 d-flex flex-column">

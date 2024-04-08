@@ -29,7 +29,7 @@ app
       });
   })
   .controller("appCtrl", ($scope, $http, $cookies, $location, $window) => {
-    // xử lí user
+    // xử lý user
     $scope.login = () => {
       var email = $scope.email;
       var password = $scope.password;
@@ -76,4 +76,42 @@ app
     };
     $scope.currentRole = JSON.parse(sessionStorage.getItem("currentRole"));
     console.log($scope.currentRole);
+    // xử lý silebar
+    $scope.isCollapsed = false;
+
+    $scope.toggleCollapse = function () {
+      $scope.isCollapsed = !$scope.isCollapsed;
+    };
+    // xử lý show product
+    $http.get("http://localhost:3000/products").then((res) => {
+      $scope.products = res.data;
+    });
+
+    // xử lí thêm sản phẩm
+    $scope.productNew = {
+      name: "",
+      pricenew: "",
+      brand: "",
+      quantity: "",
+      rate: 4,
+      priceold: "",
+      img: "",
+      category: "",
+      view: "",
+      hot: "",
+      thumbnail: [
+        "tainghe2.webp",
+        "tainghe2.1.webp",
+        "tainghe2.2.webp",
+        "tainghe2.3.webp",
+        "tainghe2.4.webp",
+      ],
+      des: "Description for Tai nghe vip 2",
+      dateCreate: "2022-01-2",
+    };
+    $http
+      .post("http://localhost:3000/products", $scope.productNew)
+      .then((res) => {
+        console.log("Success");
+      });
   });

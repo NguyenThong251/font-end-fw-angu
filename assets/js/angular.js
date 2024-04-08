@@ -318,13 +318,13 @@ app
       $http.get("http://localhost:3000/voucher").then(function (response) {
         var vouchers = response.data;
         localStorage.setItem("vouchers", JSON.stringify(vouchers)); // Lưu trữ dữ liệu vào localStorage
+        $scope.vouchers = JSON.parse(localStorage.getItem("vouchers")) || [];
       });
-      $scope.vouchers = JSON.parse(localStorage.getItem("vouchers")) || [];
       $scope.appliedVoucherPrice = 0;
       $scope.applyVoucher = function (voucherCode) {
         if (!voucherCode) {
           $scope.appliedVoucherPrice = 0;
-          // return; // Kết thúc hàm nếu voucherCode không có giá trị
+          return; // Kết thúc hàm nếu voucherCode không có giá trị
         }
         var applyVoucher = $scope.vouchers.find(function (voucher) {
           return voucher.code === voucherCode;
