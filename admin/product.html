@@ -2,12 +2,13 @@
   <div class="admin-main-header d-flex justify-content-between">
     <h3 class="admin-main-header-title fs-5 fw-bolder">All Category</h3>
     <div class="admin-main-header-btn d-flex align-items-center">
-      <button
-        class="btn btn-primary text-white fw-medium d-flex align-items-center gap-2"
+      <a
+        href="#!addproduct"
+        class="text-decoration-none text-white btn btn-primary text-white fw-medium d-flex align-items-center gap-2"
       >
         <ion-icon class="fs-5" name="add"></ion-icon>
         Add New
-      </button>
+      </a>
     </div>
   </div>
   <div class="admin-main-search my-4">
@@ -16,7 +17,12 @@
         <label for="admin-search-item" class="col-form-label">Search</label>
       </div>
       <div class="col-auto">
-        <input type="text" id="admin-search-item" class="form-control" />
+        <input
+          ng-model="keyword"
+          type="text"
+          id="admin-search-item"
+          class="form-control"
+        />
       </div>
     </div>
   </div>
@@ -42,7 +48,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="align-middle" ng-repeat="product in products">
+          <!-- | limitTo:limit:begin -->
+          <tr
+            class="align-middle"
+            ng-repeat="product in products | search:keyword:['name','pricenew'] | limitTo:limit:begin"
+          >
             <th>{{product.id}}</th>
             <td>{{product.name}}</td>
             <td>{{product.category}}</td>
@@ -56,7 +66,7 @@
               />
             </td>
             <td>{{product.pricenew | number : 0}} VNĐ</td>
-            <td>{{product.pricenew | number : 0}} VNĐ</td>
+            <td>{{product.priceold | number : 0}} VNĐ</td>
             <td>{{product.brand}}</td>
             <td>{{product.quantity}}</td>
             <td>{{product.date}}</td>
@@ -65,15 +75,22 @@
               <div class="handle-option d-flex align-items-center gap-2">
                 <ion-icon
                   class="fs-5 text-primary cursor"
+                  ng-click="openModal(product)"
                   name="eye-outline"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
                 ></ion-icon>
                 <ion-icon
+                  ng-click="openEditPro(product)"
                   class="fs-5 text-info cursor"
                   name="create-outline"
                   data-bs-toggle="modal"
                   data-bs-target="#categoryEdit"
                 ></ion-icon>
                 <ion-icon
+                  ng-click="confirmDelete(product)"
                   class="fs-5 text-danger cursor"
                   name="trash-outline"
                 ></ion-icon>
@@ -86,17 +103,352 @@
   </div>
   <nav aria-label="..." class="d-flex justify-content-end">
     <ul class="pagination">
-      <li class="page-item disabled">
-        <a class="page-link">Previous</a>
+      <li class="page-item {{(page == 1) ? 'disabled':''}}">
+        <button
+          class="page-link text-border-color"
+          ng-disabled="page === 1"
+          ng-click="chuyentrang(page - 1)"
+        >
+          Previous
+        </button>
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">2</a>
+
+      <li
+        ng-repeat="trang in totalList()"
+        class="page-item"
+        aria-current="page"
+      >
+        <!-- ng-if="trang !== '...'" -->
+        <button
+          ng-class="{'active-color' :page==trang}"
+          ng-click="chuyentrang(trang)"
+          class="page-link text-border-color"
+          href="#"
+        >
+          {{trang}}
+        </button>
       </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+
+      <li class="page-item {{(page == totalPage()) ? 'disabled':''}}">
+        <button
+          ng-disabled="page === totalPage()"
+          ng-click="chuyentrang(page + 1)"
+          class="page-link text-border-color"
+          href="#"
+        >
+          Next
+        </button>
       </li>
     </ul>
   </nav>
+</div>
+<div
+  class="modal fade"
+  id="categoryEdit"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Category</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form edit product -->
+        <div ng-show="isEditing" class="mt-5 d-flex flex-column gap-3">
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="Productname"
+              >Product Name</label
+            >
+            <div class="col-9">
+              <input
+                ng-model="productNew.name"
+                type="text"
+                class="form-control"
+                id="Productname"
+                placeholder="Product Name"
+              />
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="ProductQuatity"
+              >Product Quantity</label
+            >
+            <div class="col-9">
+              <input
+                ng-model="productNew.quantity"
+                type="number"
+                class="form-control"
+                id="ProductQuatity"
+                placeholder="Product Quantity"
+              />
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="ProducPrice"
+              >Product Price</label
+            >
+            <div class="col-9">
+              <input
+                class="form-control"
+                ng-model="productNew.pricenew"
+                type="number"
+                id="ProductPrice"
+                placeholder="Product Price"
+              />
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="ProductCategory"
+              >Product Category</label
+            >
+            <div class="col-9">
+              <select
+                ng-model="category"
+                ng-options="category.name for category in categorys"
+                ng-change="updateCategory(category)"
+                class="form-select"
+                aria-label="Default select example"
+              ></select>
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="ProducOffer"
+              >Product Offer (%) {{productOffer}}</label
+            >
+            <div class="col-9">
+              <input
+                type="number"
+                max="50"
+                class="form-control w-100"
+                ng-model="productOffer"
+                required
+              />
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="Status">Status</label>
+            <div class="col-9">
+              <select
+                class="form-select"
+                ng-model="productNew.status"
+                aria-label="Default select example"
+              >
+                <option value="active">Active</option>
+                <option value="pending">Pending</option>
+                <option value="disable">Disable</option>
+              </select>
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="Trending">Trending</label>
+            <div class="col-9">
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                ng-model="productNew.hot"
+              >
+                <option ng-value="false">False</option>
+                <option ng-value="true">True</option>
+              </select>
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="Trending">Brand</label>
+            <div class="col-9">
+              <select
+                ng-model="brand"
+                ng-options="brand.name for brand in brands"
+                ng-change="updatebrand(brand)"
+                class="form-select"
+                aria-label="Default select example"
+              ></select>
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="Productimg"
+              >Product Images</label
+            >
+            <div class="col-9">
+              <input
+                class="form-control"
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                onchange="angular.element(this).scope().uploadImage(this)"
+              />
+            </div>
+            <div class="col-9 ms-auto">
+              <img
+                ng-src="{{ productNew.img }}"
+                alt=""
+                width="150"
+                height="150"
+              />
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="Productimg"
+              >Thumbnail Image</label
+            >
+            <div class="col-9">
+              <input
+                class="form-control"
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                onchange="angular.element(this).scope().previewImages(this)"
+                multiple
+              />
+            </div>
+            <div class="col-9 ms-auto">
+              <div class="row">
+                <div
+                  class="position-relative col-3"
+                  ng-repeat="thumbnail in productNew.thumbnail"
+                >
+                  <img
+                    ng-src="{{ thumbnail }}"
+                    alt=""
+                    width="150"
+                    height="150"
+                  />
+                  <ion-icon
+                    class="cursor text-danger position-absolute top-0 end-0"
+                    name="close-outline"
+                    ng-click="deleteThumbnail($index)"
+                  ></ion-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-group-item row g-3">
+            <label class="col-3 fs-6 fw-medium" for="Productimg"
+              >Product Description</label
+            >
+            <div class="col-9">
+              <textarea
+                ng-model="productNew.des"
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+          <div class="btn-update ms-auto">
+            <button
+              class="btn btn-outline-primary fw-medium"
+              ng-click="editProduct(productOffer)"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PRODUCT DETAIL -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+  ng-show="isModalOpen"
+>
+  <div class="custom-modal-width modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header p-0 pt-3 pe-3 border-0">
+        <button
+          ng-click="closeModal()"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body p-3 pt-0 p-0">
+        <div class="row">
+          <div class="col-md-5 col-sm-12 col-xs-12">
+            <div class="modal-img rounded-2 overflow-hidden">
+              <img src="{{selectedProduct.img}}" alt="" class="img-cover" />
+            </div>
+            <div class="row">
+              <div
+                class="col-3"
+                ng-repeat="thumbnail in selectedProduct.thumbnail"
+              >
+                <img
+                  ng-src="{{thumbnail}}"
+                  ng-click="changeMainImage(thumbnail)"
+                  alt=""
+                  class="img-cover"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-12 col-xs-12">
+            <div class="modal-right">
+              <h2 class="modal-product-name fs-6 fw-bolder">
+                {{selectedProduct.name}}
+              </h2>
+              <span class="modal-product-des text-border-color">
+                {{selectedProduct.des}}</span
+              >
+              <div
+                class="modal-review border-top border-2 mt-2 pt-2 d-flex gap-2 align-items-center"
+              >
+                <div class="star fs-5 text-warning">
+                  <ion-icon name="star"></ion-icon
+                  ><ion-icon name="star"></ion-icon
+                  ><ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star-half"></ion-icon>
+                </div>
+                <span class="fw-medium text-border-color">( 75 Review )</span>
+              </div>
+              <div class="deatail-list">
+                <ul class="list-group w-50 my-2 gap-3">
+                  <li
+                    class="list-group-item border-0 d-flex justify-content-between p-0"
+                  >
+                    <label class="fw-bolder" for=""
+                      >Brand <span>:</span>
+                    </label>
+                    {{selectedProduct.brand | uppercase}}
+                  </li>
+                  <li
+                    class="list-group-item border-0 d-flex justify-content-between p-0"
+                  >
+                    <label class="fw-bolder" for=""
+                      >Category <span>:</span>
+                    </label>
+                    {{selectedProduct.category}}
+                  </li>
+                </ul>
+              </div>
+              <div class="modal-product-price d-flex gap-3 align-items-end">
+                <span class="modal-price-old fs-4 fw-bolder text-primary"
+                  >{{selectedProduct.pricenew | number: 0 }}VNĐ</span
+                >
+                <del class="modal-price-new fs-5 text-border-color"
+                  >{{selectedProduct.priceold | number: 0 }}VNĐ</del
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

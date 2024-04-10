@@ -1,36 +1,15 @@
 <div class="bg-light p-3 shadow-sm rounded-2 w-50 mx-auto">
   <h4 class="fs-4 fw-medium">Add Product</h4>
-  <form action="" class="mt-5 d-flex flex-column gap-3">
-    <div class="input-group-item row g-3">
-      <label class="col-3 fs-6 fw-medium" for="Productid">Product Id</label>
-      <div class="col-9">
-        <input
-          type="text"
-          class="form-control"
-          id="Productid"
-          placeholder="Product Id"
-        />
-      </div>
-    </div>
+  <div class="mt-5 d-flex flex-column gap-3">
     <div class="input-group-item row g-3">
       <label class="col-3 fs-6 fw-medium" for="Productname">Product Name</label>
       <div class="col-9">
         <input
+          ng-model="productNew.name"
           type="text"
           class="form-control"
           id="Productname"
           placeholder="Product Name"
-        />
-      </div>
-    </div>
-    <div class="input-group-item row g-3">
-      <label class="col-3 fs-6 fw-medium" for="Productdate">Product Date</label>
-      <div class="col-9">
-        <input
-          type="date"
-          class="form-control"
-          id="Productdate"
-          placeholder="Product Date"
         />
       </div>
     </div>
@@ -40,6 +19,7 @@
       >
       <div class="col-9">
         <input
+          ng-model="productNew.quantity"
           type="number"
           class="form-control"
           id="ProductQuatity"
@@ -53,81 +33,81 @@
       >
       <div class="col-9">
         <input
-          type="number"
           class="form-control"
+          ng-model="productNew.pricenew"
+          type="number"
           id="Product Price"
           placeholder="Product Price"
         />
       </div>
     </div>
     <div class="input-group-item row g-3">
-      <label class="col-3 fs-6 fw-medium" for="Produc Category"
+      <label class="col-3 fs-6 fw-medium" for="ProductCategory"
         >Product Category</label
       >
+      <!-- <span>{{category.id}}</span> -->
       <div class="col-9">
-        <input
-          type="text"
-          class="form-control"
-          id="Product Category"
-          placeholder="Product  Category"
-        />
+        <select
+          ng-model="category"
+          ng-options="category.name for category in categorys"
+          ng-change="updateCategory(category)"
+          class="form-select"
+          aria-label="Default select example"
+        ></select>
       </div>
     </div>
     <div class="input-group-item row g-3">
       <label class="col-3 fs-6 fw-medium" for="ProducOffer"
-        >Product Offer</label
-      >
+        >Product Offer (%) {{productOffer}}
+      </label>
       <div class="col-9">
         <input
-          type="range"
-          class="form-range w-100"
-          id="rangeInput"
-          name="rangeInput"
-          min="0"
-          max="100"
-          value="0"
-          oninput="amount.value=rangeInput.value"
+          type="number"
+          max="50"
+          class="form-control w-100"
+          ng-model="productOffer"
+          required
         />
-        <output
-          id="amount"
-          name="amount"
-          min-value="0"
-          max-value="100"
-          for="rangeInput"
-          >0</output
-        >
+        <!-- ng-change="getOffer(productOffer)" -->
       </div>
     </div>
     <div class="input-group-item row g-3">
       <label class="col-3 fs-6 fw-medium" for="Status">Status</label>
       <div class="col-9">
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Chọn trạng thái</option>
-          <option value="1">Active</option>
-          <option value="2">Pending</option>
-          <option value="2">Disable</option>
+        <select
+          class="form-select"
+          ng-model="productNew.status"
+          aria-label="Default select example"
+        >
+          <option value="active">Active</option>
+          <option value="pending">Pending</option>
+          <option value="disable">Disable</option>
         </select>
       </div>
     </div>
     <div class="input-group-item row g-3">
       <label class="col-3 fs-6 fw-medium" for="Trending">Trending</label>
       <div class="col-9">
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Chọn trạng thái</option>
-          <option value="1">Hot</option>
-          <option value="2">Trending</option>
-          <option value="3">View</option>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          ng-model="productNew.hot"
+        >
+          <option ng-value="false">False</option>
+          <option ng-value="true">True</option>
         </select>
       </div>
     </div>
     <div class="input-group-item row g-3">
       <label class="col-3 fs-6 fw-medium" for="Trending">Brand</label>
       <div class="col-9">
-        <select class="form-select" aria-label="Default select example">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
+        <select
+          ng-model="brand"
+          ng-options="brand.name for brand in brands"
+          ng-change="updatebrand(brand)"
+          class="form-select"
+          aria-label="Default select example"
+        ></select>
       </div>
     </div>
 
@@ -139,9 +119,13 @@
         <input
           class="form-control"
           type="file"
-          id="formFileMultiple"
-          multiple
+          id="fileInput"
+          accept="image/*"
+          onchange="angular.element(this).scope().uploadImage(this)"
         />
+      </div>
+      <div class="col-9 ms-auto">
+        <img ng-src="{{ productNew.img }}" alt="" width="150" height="150" />
       </div>
     </div>
     <div class="input-group-item row g-3">
@@ -152,45 +136,35 @@
         <input
           class="form-control"
           type="file"
-          id="formFileMultiple"
+          id="fileInput"
+          accept="image/*"
+          onchange="angular.element(this).scope().previewImages(this)"
           multiple
         />
       </div>
-    </div>
-    <!-- <div class="input-group-item row g-3">
-      <label class="col-3 fs-6 fw-medium" for="Productimg">Product Color</label>
-      <div class="col-9">
-        <div class="d-flex gap-3">
-          <input
-            type="color"
-            class="form-control form-control-color"
-            id="exampleColorInput"
-            value="#56234"
-            title="Choose your color"
-          />
-          <input
-            type="color"
-            class="form-control form-control-color"
-            id="exampleColorInput"
-            value="#D22828"
-            title="Choose your color"
-          />
-          <input
-            type="color"
-            class="form-control form-control-color"
-            id="exampleColorInput"
-            value="#563d7c"
-            title="Choose your color"
-          />
+      <div class="col-9 ms-auto">
+        <div class="row">
+          <div
+            class="position-relative col-3"
+            ng-repeat="thumbnail in productNew.thumbnail"
+          >
+            <img ng-src="{{ thumbnail }}" alt="" width="150" height="150" />
+            <ion-icon
+              class="cursor text-danger position-absolute top-0 end-0"
+              name="close-outline"
+              ng-click="deleteThumbnail($index)"
+            ></ion-icon>
+          </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="input-group-item row g-3">
       <label class="col-3 fs-6 fw-medium" for="Productimg"
         >Product Description</label
       >
       <div class="col-9">
         <textarea
+          ng-model="productNew.des"
           class="form-control"
           id="exampleFormControlTextarea1"
           rows="3"
@@ -199,7 +173,12 @@
       </div>
     </div>
     <div class="btn-update ms-auto">
-      <button class="btn btn-outline-primary fw-medium">Add Product</button>
+      <button
+        class="btn btn-outline-primary fw-medium"
+        ng-click="addProduct(productOffer)"
+      >
+        Add Product
+      </button>
     </div>
-  </form>
+  </div>
 </div>

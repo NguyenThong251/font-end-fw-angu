@@ -23,54 +23,15 @@
 </div>
 <ul class="side-nav p-3 d-flex flex-column gap-2 overflow-y">
   <li class="side-nav-item list-group-item">
-    <div
-      class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center cursor hover-item active-navbar"
+    <a
+      href="#!dashboard"
+      class="side-nav-item-content text-decoration-none text-primary p-2 rounded-2 d-flex gap-3 align-items-center cursor hover-item active-navbar"
     >
       <ion-icon class="text-primary fs-5" name="rocket"></ion-icon>
       <span class="fs-6 fw-medium">Dashboard</span>
-    </div>
+    </a>
   </li>
   <div class="accordion" id="accordionExample">
-    <li
-      class="side-nav-item list-group-item"
-      data-bs-toggle="collapse"
-      data-bs-target="#collapseOne-category"
-      aria-expanded="false"
-      aria-controls="collapseOne-category"
-    >
-      <div
-        class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
-      >
-        <ion-icon class="text-primary fs-5" name="list"></ion-icon>
-        <span class="fs-6 fw-medium">Category</span>
-      </div>
-      <div
-        id="collapseOne-category"
-        class="accordion-collapse collapse"
-        data-bs-parent="#accordionExample"
-      >
-        <div class="accordion-body">
-          <ul class="gap-3 d-flex flex-column">
-            <li>
-              <a
-                class="text-decoration-none hover-list text-dark fw-medium"
-                href="#!category"
-              >
-                Category List</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-decoration-none hover-list text-dark fw-medium"
-                href="#!addcategory"
-              >
-                Category Add</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </li>
     <li
       class="side-nav-item list-group-item"
       ng-click="toggleCollapse()"
@@ -104,6 +65,45 @@
                 href="#!addproduct"
               >
                 Product Add</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li
+      class="side-nav-item list-group-item"
+      ng-click="toggleCategoryCollapse()"
+      ng-class="{ 'active': isCategoryCollapsed }"
+    >
+      <div
+        class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+      >
+        <ion-icon class="text-primary fs-5" name="layers"></ion-icon>
+        <span class="fs-6 fw-medium">Category</span>
+      </div>
+      <!-- Menu cấp 2 -->
+      <!-- id="collapseOne-product" -->
+      <div
+        class="accordion-collapse collapse"
+        ng-class="{ 'show': isCategoryCollapsed }"
+      >
+        <div class="accordion-body">
+          <ul class="gap-3 d-flex flex-column">
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href="#!category"
+              >
+                Product List</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-decoration-none hover-list text-dark fw-medium"
+                href="#!addcategory"
+              >
+                Category Add</a
               >
             </li>
           </ul>
