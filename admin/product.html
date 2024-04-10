@@ -101,7 +101,7 @@
       </table>
     </div>
   </div>
-  <nav aria-label="..." class="d-flex justify-content-end">
+  <nav aria-label="..." class="mb-0 pb-0 d-flex justify-content-end">
     <ul class="pagination">
       <li class="page-item {{(page == 1) ? 'disabled':''}}">
         <button
@@ -118,7 +118,6 @@
         class="page-item"
         aria-current="page"
       >
-        <!-- ng-if="trang !== '...'" -->
         <button
           ng-class="{'active-color' :page==trang}"
           ng-click="chuyentrang(trang)"

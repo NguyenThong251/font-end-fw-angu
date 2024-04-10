@@ -2,12 +2,13 @@
   <div class="admin-main-header d-flex justify-content-between">
     <h3 class="admin-main-header-title fs-5 fw-bolder">All Category</h3>
     <div class="admin-main-header-btn d-flex align-items-center">
-      <button
-        class="btn btn-primary text-white fw-medium d-flex align-items-center gap-2"
+      <a
+        href="#!addcategory"
+        class="btn btn-primary text-decoration-none text-white fw-medium d-flex align-items-center gap-2"
       >
         <ion-icon class="fs-5" name="add"></ion-icon>
         Add New
-      </button>
+      </a>
     </div>
   </div>
   <div class="admin-main-search my-4">
@@ -16,7 +17,12 @@
         <label for="admin-search-item" class="col-form-label">Search</label>
       </div>
       <div class="col-auto">
-        <input type="text" id="admin-search-item" class="form-control" />
+        <input
+          ng-model="keyword"
+          type="text"
+          id="admin-search-item"
+          class="form-control"
+        />
       </div>
     </div>
   </div>
@@ -25,154 +31,36 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th class="fw-semibold">Id</th>
             <th class="fw-semibold">Product Name</th>
-            <th class="fw-semibold">Imgage</th>
+            <th class="fw-semibold">Image</th>
             <th class="fw-semibold">Date</th>
             <th class="fw-semibold">Status</th>
-            <th class="fw-semibold">Treding</th>
             <th class="fw-semibold">Handle</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="align-middle">
-            <th>1</th>
-            <td>Banh so 1</td>
+          <tr
+            class="align-middle"
+            ng-repeat="category in categorys | search:keyword:['name'] | limitTo:limit:begin "
+          >
+            <td>{{category.name}}</td>
             <td>
-              <img
-                src="../uploads/product1.jpg"
-                alt=""
-                width="80"
-                height="80"
-                class="border border-secondary rounded-2"
-              />
+              <img src="{{category.img}}" alt="" width="80" height="80" />
             </td>
-            <td>25-01-2004</td>
-            <td>Active</td>
-            <td>
-              <span class="badge text-bg-primary text-white">Top</span>
-            </td>
+            <td>{{category.date}}</td>
+            <td>{{category.status}}</td>
+
             <td>
               <div class="handle-option d-flex align-items-center gap-2">
                 <ion-icon
-                  class="fs-5 text-primary cursor"
-                  name="eye-outline"
-                ></ion-icon>
-                <ion-icon
+                  ng-click="openEditCate(category)"
                   class="fs-5 text-info cursor"
                   name="create-outline"
                   data-bs-toggle="modal"
                   data-bs-target="#categoryEdit"
                 ></ion-icon>
                 <ion-icon
-                  class="fs-5 text-danger cursor"
-                  name="trash-outline"
-                ></ion-icon>
-              </div>
-            </td>
-          </tr>
-          <tr class="align-middle">
-            <th>1</th>
-            <td>Banh so 1</td>
-            <td>
-              <img
-                src="../uploads/product1.jpg"
-                alt=""
-                width="80"
-                height="80"
-                class="border border-secondary rounded-2"
-              />
-            </td>
-            <td>25-01-2004</td>
-            <td>Inactive</td>
-            <td>
-              <span class="badge text-bg-danger text-white">Low</span>
-            </td>
-            <td>
-              <div class="handle-option d-flex align-items-center gap-2">
-                <ion-icon
-                  class="fs-5 text-primary cursor"
-                  name="eye-outline"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-info cursor"
-                  name="create-outline"
-                  data-bs-toggle="modal"
-                  data-bs-target="#categoryEdit"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-danger cursor"
-                  name="trash-outline"
-                ></ion-icon>
-              </div>
-            </td>
-          </tr>
-          <tr class="align-middle">
-            <th>1</th>
-            <td>Banh so 1</td>
-            <td>
-              <img
-                src="../uploads/product1.jpg"
-                alt=""
-                width="80"
-                height="80"
-                class="border border-secondary rounded-2"
-              />
-            </td>
-            <td>25-01-2004</td>
-            <td>Active</td>
-            <td>
-              <span class="badge text-bg-info text-white">Medium</span>
-            </td>
-            <td>
-              <div class="handle-option d-flex align-items-center gap-2">
-                <ion-icon
-                  class="fs-5 text-primary cursor"
-                  name="eye-outline"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-info cursor"
-                  name="create-outline"
-                  data-bs-toggle="modal"
-                  data-bs-target="#categoryEdit"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-danger cursor"
-                  name="trash-outline"
-                ></ion-icon>
-              </div>
-            </td>
-          </tr>
-          <tr class="align-middle">
-            <th>1</th>
-            <td>Banh so 1</td>
-            <td>
-              <img
-                src="../uploads/product1.jpg"
-                alt=""
-                width="80"
-                height="80"
-                class="border border-secondary rounded-2"
-              />
-            </td>
-            <td>25-01-2004</td>
-            <td>Active</td>
-            <td>
-              <span class="badge text-bg-primary text-white">Top</span>
-            </td>
-            <td>
-              <div class="handle-option d-flex align-items-center gap-2">
-                <ion-icon
-                  class="fs-5 text-primary cursor"
-                  name="eye-outline"
-                ></ion-icon>
-                <ion-icon
-                  class="fs-5 text-info cursor"
-                  name="create-outline"
-                  data-bs-toggle="modal"
-                  data-bs-target="#categoryEdit"
-                ></ion-icon>
-                <ion-icon
+                  ng-click="confirmDeleteCate(category)"
                   class="fs-5 text-danger cursor"
                   name="trash-outline"
                 ></ion-icon>
@@ -183,18 +71,45 @@
       </table>
     </div>
   </div>
-  <nav aria-label="..." class="d-flex justify-content-end">
+  <nav
+    aria-label="..."
+    class="wow fadeInRight mb-0 pb-0 d-flex justify-content-end"
+  >
     <ul class="pagination">
-      <li class="page-item disabled">
-        <a class="page-link">Previous</a>
+      <li class="page-item {{(page == 1) ? 'disabled':''}}">
+        <button
+          class="page-link text-border-color"
+          ng-disabled="page === 1"
+          ng-click="chuyentrang(page - 1)"
+        >
+          Previous
+        </button>
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">2</a>
+
+      <li
+        ng-repeat="trang in totalListCate()"
+        class="page-item"
+        aria-current="page"
+      >
+        <button
+          ng-class="{'active-color' :page==trang}"
+          ng-click="chuyentrang(trang)"
+          class="page-link text-border-color"
+          href="#"
+        >
+          {{trang}}
+        </button>
       </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+
+      <li class="page-item {{(page == totalPageCate()) ? 'disabled':''}}">
+        <button
+          ng-disabled="page === totalPageCate()"
+          ng-click="chuyentrang(page + 1)"
+          class="page-link text-border-color"
+          href="#"
+        >
+          Next
+        </button>
       </li>
     </ul>
   </nav>
@@ -220,32 +135,18 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form action="" class="d-flex flex-column gap-3">
+        <form action="" class="mt-5 d-flex flex-column gap-3">
           <div class="input-group-item row g-3">
-            <label class="col-3 fs-6 fw-medium" for="categoryid"
-              >Category Id</label
+            <label class="col-3 fs-6 fw-medium" for="categoryname"
+              >Category Name</label
             >
             <div class="col-9">
               <input
+                ng-model="categoryNew.name"
                 type="text"
                 class="form-control"
-                id="categoryid"
-                placeholder="Category Id"
-                fdprocessedid="fz7vtj"
-              />
-            </div>
-          </div>
-          <div class="input-group-item row g-3">
-            <label class="col-3 fs-6 fw-medium" for="categorydate"
-              >Category Date</label
-            >
-            <div class="col-9">
-              <input
-                type="date"
-                class="form-control"
-                id="categorydate"
-                placeholder="Category Date"
-                fdprocessedid="q12jrq"
+                id="categoryname"
+                placeholder="Category Name"
               />
             </div>
           </div>
@@ -253,64 +154,43 @@
             <label class="col-3 fs-6 fw-medium" for="Status">Status</label>
             <div class="col-9">
               <select
+                ng-model="categoryNew.status"
                 class="form-select"
                 aria-label="Default select example"
-                fdprocessedid="j61dn5"
               >
-                <option selected="">Chọn trạng thái</option>
-                <option value="1">ACTIVE</option>
-                <option value="2">Inactive</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
               </select>
             </div>
           </div>
           <div class="input-group-item row g-3">
-            <label class="col-3 fs-6 fw-medium" for="Trending">Trending</label>
-            <div class="col-9">
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                fdprocessedid="awh"
-              >
-                <option selected="">Chọn trạng thái</option>
-                <option value="1">Low</option>
-                <option value="2">Medium</option>
-                <option value="3">Top</option>
-              </select>
-            </div>
-          </div>
-          <div class="input-group-item row g-3">
-            <label class="col-3 fs-6 fw-medium" for="categoryname"
-              >Category Name</label
-            >
-            <div class="col-9">
-              <input
-                type="text"
-                class="form-control"
-                id="categoryname"
-                placeholder="Category Name"
-                fdprocessedid="0x9gl6"
-              />
-            </div>
-          </div>
-          <div class="input-group-item row g-3">
-            <label class="col-3 fs-6 fw-medium" for="categoryimg"
-              >Category Images</label
+            <label class="col-3 fs-6 fw-medium" for="Productimg"
+              >Product Images</label
             >
             <div class="col-9">
               <input
                 class="form-control"
                 type="file"
-                id="formFileMultiple"
-                multiple=""
+                id="fileInput"
+                accept="image/*"
+                onchange="angular.element(this).scope().uploadImage(this)"
+              />
+            </div>
+            <div class="col-9 ms-auto">
+              <img
+                ng-src="{{ categoryNew.img }}"
+                alt=""
+                width="150"
+                height="150"
               />
             </div>
           </div>
           <div class="btn-update ms-auto">
             <button
+              ng-click="EditCategory()"
               class="btn btn-outline-primary fw-medium"
-              fdprocessedid="dn2sho"
             >
-              Upadte
+              Edit Category
             </button>
           </div>
         </form>

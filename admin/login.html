@@ -1,16 +1,15 @@
-<!-- LOGIN -->
-<section class="section-login container">
+<section class="section-login my-7 container">
   <div class="row">
     <div class="col-12">
       <div class="row">
         <div class="col-4"></div>
         <div
-          class="col-4 wow fadeInUp d-flex justify-content-center p-4 shadow-sm border rounded-2 border-secondary d-flex flex-column gap-3"
+          class="col-4 wow fadeInUp d-flex justify-content-center p-4 border rounded-2 border-secondary d-flex flex-column gap-3"
         >
           <div class="form-logo d-flex justify-content-center">
             <img src="uploads/logo.png" alt="" width="120" />
           </div>
-          <form class="row g-3 needs-validation" novalidate>
+          <div class="row g-3 needs-validation" novalidate>
             <div class="col-md-12">
               <label for="validationCustom01" class="form-label fw-medium"
                 >Email Address</label
@@ -56,9 +55,9 @@
             </div>
             <div class="col-12 d-flex justify-content-between align-items-end">
               <button
-                ng-click="login()"
+                ng-click="loginAdmin(email,password)"
                 class="btn btn-primary fw-bolder text-white"
-                type="submit"
+                type="button"
               >
                 Login
               </button>
@@ -70,7 +69,7 @@
                 ></span
               >
             </div>
-          </form>
+          </div>
           <div class="social-button">
             <div class="socical-line">
               <div
@@ -81,6 +80,7 @@
             <div class="row g-3 mt-2">
               <div class="col-sm-12">
                 <button
+                  id="loginGoogle"
                   class="d-flex justify-content-center w-100 align-items-center gap-2 fw-medium border p-2 border-secondary rounded-2"
                 >
                   <img src="uploads/gg.png" alt="" width="20" /> Sign in with

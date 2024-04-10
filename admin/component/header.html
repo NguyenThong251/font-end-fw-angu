@@ -42,15 +42,18 @@
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <span>Hoàng Thông</span>
-        <img src="uploads/about-profile.png" class="rounded-circle" width="30"
+        <span>{{currentRole.name}}</span>
+        <img
+          src="uploads/{{currentRole.img}}"
+          class="rounded-circle"
+          width="30"
       /></a>
 
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Dashboard</a></li>
         <li>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" ng-click="logout()">Logout</a>
         </li>
       </ul>
     </div>

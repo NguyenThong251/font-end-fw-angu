@@ -6,6 +6,9 @@ app
       .when("/", {
         templateUrl: "admin/login.html",
       })
+      .when("/login", {
+        templateUrl: "admin/login.html",
+      })
       .when("/dashboard", {
         templateUrl: "admin/dashboard.html",
       })
@@ -21,6 +24,18 @@ app
       .when("/addcategory", {
         templateUrl: "admin/addcategory.html",
       })
+      .when("/user", {
+        templateUrl: "admin/user.html",
+      })
+      .when("/role", {
+        templateUrl: "admin/role.html",
+      })
+      .when("/order", {
+        templateUrl: "admin/order.html",
+      })
+      .when("/setting", {
+        templateUrl: "admin/setting.html",
+      })
       // .otherwise({
       //   rediRectTo: "/",
       // });
@@ -30,9 +45,7 @@ app
   })
   .controller("appCtrl", ($scope, $http, $cookies, $location, $window) => {
     // XỬ LÝ UESER
-    $scope.login = () => {
-      var email = $scope.email;
-      var password = $scope.password;
+    $scope.loginAdmin = (email, password) => {
       $http.get("http://localhost:3000/role").then((res) => {
         var role = res.data.find(
           (role) => role.email === email && role.password === password
@@ -90,6 +103,13 @@ app
     $http.get("http://localhost:3000/products").then((res) => {
       $scope.products = res.data;
     });
+    $scope.countProduct = function () {
+      if ($scope.products && $scope.products.length > 0) {
+        return $scope.products.length;
+      } else {
+        return 0;
+      }
+    };
     // xử lí thời gian
     $scope.getCurrentDateTime = function () {
       var now = new Date();
@@ -137,6 +157,9 @@ app
           console.log(base64Image);
           $scope.$apply(function () {
             $scope.productNew.img = base64Image;
+            $scope.categoryNew.img = base64Image;
+            $scope.userNew.img = base64Image;
+            $scope.roleNew.img = base64Image;
           });
         };
         reader.readAsDataURL(file);
@@ -182,7 +205,68 @@ app
     // XỬ LÍ SHOW CATEGORY
     $http.get("http://localhost:3000/category").then((res) => {
       $scope.categorys = res.data;
+      // Xử lý danh sách categorys
+      var categoryCounts = {};
+      $scope.categorys.forEach((category) => {
+        categoryCounts[category.id] = 0;
+      });
+
+      // Tiếp tục yêu cầu GET để lấy danh sách sản phẩm
+      $http.get("http://localhost:3000/products").then((res) => {
+        $scope.products = res.data;
+
+        // Xử lý số lượng sản phẩm cho mỗi danh mục
+        $scope.products.forEach((product) => {
+          // Kiểm tra xem danh mục của sản phẩm có tồn tại trong categoryCounts không
+          if (categoryCounts.hasOwnProperty(product.category)) {
+            // Nếu có, tăng giá trị đếm cho danh mục đó
+            categoryCounts[product.category]++;
+          }
+        });
+
+        // Tạo biểu đồ cột
+        var RevenueReport = {
+          series: [
+            {
+              data: Object.values(categoryCounts),
+            },
+          ],
+          chart: {
+            type: "bar",
+            height: 350,
+            toolbar: {
+              show: false,
+            },
+          },
+          color: ["#198754", "#0d6efd", "#ffc107", "#dc3545;", "#64b496"],
+          plotOptions: {
+            bar: {
+              distributed: true,
+              borderRadius: 4,
+              horizontal: false,
+              columnWidth: "40%",
+            },
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          legend: {
+            show: false,
+          },
+          xaxis: {
+            categories: Object.keys(categoryCounts),
+          },
+        };
+
+        // Render biểu đồ
+        var chart = new ApexCharts(
+          document.querySelector("#RevenueReport"),
+          RevenueReport
+        );
+        chart.render();
+      });
     });
+
     // XỬ LÍ SHOW CATEGORY
     $http.get("http://localhost:3000/brand").then((res) => {
       $scope.brands = res.data;
@@ -207,6 +291,7 @@ app
       $scope.productNew = angular.copy(product);
       $scope.isEditing = true;
     };
+
     $scope.editProduct = function (offer) {
       if (!isValidProduct($scope.productNew)) {
         // Hiển thị thông báo lỗi nếu dữ liệu không hợp lệ
@@ -358,16 +443,27 @@ app
       // }
     };
     $scope.totalPage = function () {
-      return Math.ceil($scope.products.length / $scope.limit);
+      if ($scope.products && $scope.products.length > 0) {
+        return Math.ceil($scope.products.length / $scope.limit);
+      } else {
+        return 0; // or any default value as per your requirement
+      }
+    };
+    $scope.totalPageCate = function () {
+      if ($scope.categogys && $scope.categogys.length > 0) {
+        return Math.ceil($scope.categogys.length / $scope.limit);
+      } else {
+        return 0; // or any default value as per your requirement
+      }
     };
     // option 1
-    // $scope.totalList = function () {
-    //   let arr = [];
-    //   for (let i = 1; i <= $scope.totalPage(); i++) {
-    //     arr.push(i);
-    //   }
-    //   return arr;
-    // };
+    $scope.totalListCate = function () {
+      let arr = [];
+      for (let i = 1; i <= $scope.totalPageCate(); i++) {
+        arr.push(i);
+      }
+      return arr;
+    };
     // option 2
     $scope.totalList = () => {
       let arr = [];
@@ -409,6 +505,449 @@ app
       }
       return arr;
     };
+    // XỬ LÍ POST CATEGORY
+    $scope.categoryNew = {
+      name: "",
+      img: "",
+      date: $scope.getCurrentDateTime(),
+      status: "",
+    };
+    $scope.addCategory = () => {
+      $http
+        .post("http://localhost:3000/category", $scope.categoryNew)
+        .then((res) => {
+          showSuccessMessage();
+        });
+    };
+    // XỬ LÝ PUT
+    // Xử lí edit Cate
+    $scope.openEditCate = function (categogy) {
+      $scope.categoryNew = angular.copy(categogy);
+      $scope.isEditing = true;
+    };
+    $scope.EditCategory = function () {
+      $http
+        .put(
+          "http://localhost:3000/category/" + $scope.categoryNew.id,
+          $scope.categoryNew
+        )
+        .then(function (response) {
+          // Xử lý khi cập nhật thành công
+          swal({
+            title: "Thành công",
+            text: "Sản phẩm đã được cập nhật thành công",
+            icon: "success",
+            buttons: {
+              confirm: {
+                text: "OK",
+                className: "btn btn-primary text-white", // Class cho nút Đồng ý
+              },
+            },
+          });
+
+          // Sau khi cập nhật thành công, xóa nội dung form hoặc đóng modal
+        })
+        .catch(function (error) {
+          // Xử lý khi có lỗi xảy ra trong quá trình cập nhật
+          swal({
+            title: "Lỗi",
+            text: "Đã có lỗi xảy ra. Vui lòng thử lại sau",
+            icon: "error",
+            buttons: {
+              confirm: {
+                text: "OK",
+                className: "btn btn-danger text-white", // Class cho nút Đồng ý
+              },
+            },
+          });
+        });
+    };
+    $scope.logout = () => {
+      sessionStorage.removeItem("currentRole");
+      $scope.currentRole = null;
+      // Redirect to login page
+      $location.path("/login");
+
+      // Reload the page
+      // $window.location.reload();
+    };
+    $scope.confirmDeleteCate = function (category) {
+      // Sử dụng hộp thoại xác nhận của Bootstrap
+      swal({
+        title: "Bạn có chắc chắn muốn xóa?",
+        text: "Sau khi xóa, bạn sẽ không thể khôi phục lại dữ liệu!",
+        icon: "warning",
+        buttons: {
+          cancel: "Hủy",
+          confirm: {
+            text: "Xóa",
+            className: "btn-danger",
+          },
+        },
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          // Nếu người dùng xác nhận xóa
+          // Gọi hàm deleteProduct để xóa sản phẩm
+          $scope.deleteCate(category);
+        }
+      });
+    };
+    $scope.deleteCate = function (category) {
+      // Thực hiện gửi yêu cầu xóa sản phẩm đến máy chủ
+      $http
+        .delete("http://localhost:3000/category/" + category.id)
+        .then(function (response) {
+          // Xóa sản phẩm khỏi danh sách products
+          $scope.categorys = $scope.categorys.filter(function (item) {
+            return item.id !== category.id;
+          });
+
+          // Hiển thị thông báo thành công
+          swal("Thành công", "Sản phẩm đã được xóa thành công!", "success");
+        })
+        .catch(function (error) {
+          // Xử lý lỗi nếu có
+          console.error("Error deleting product: ", error);
+          swal(
+            "Lỗi",
+            "Đã xảy ra lỗi khi xóa sản phẩm. Vui lòng thử lại sau.",
+            "error"
+          );
+        });
+    };
+    $http.get("http://localhost:3000/user").then((res) => {
+      $scope.users = res.data;
+    });
+    $scope.countUsers = function () {
+      if ($scope.users && $scope.users.length > 0) {
+        return $scope.users.length;
+      } else {
+        return 0;
+      }
+    };
+    // ADD USER
+    $scope.userNew = {
+      name: "",
+      img: "",
+      email: "",
+      phone: "",
+      password: "",
+    };
+    $scope.addUserNew = () => {
+      $http.post("http://localhost:3000/user", $scope.userNew);
+      console.log($scope.userNew).then((res) => {
+        showSuccessMessage();
+      });
+    };
+    // EDIT USER
+    $scope.openEditUser = function (user) {
+      $scope.userNew = angular.copy(user);
+      $scope.isEditing = true;
+    };
+    $scope.EditUser = function () {
+      $http
+        .put("http://localhost:3000/user/" + $scope.userNew.id, $scope.userNew)
+        .then(function (response) {
+          // Xử lý khi cập nhật thành công
+          swal({
+            title: "Thành công",
+            text: "Sản phẩm đã được cập nhật thành công",
+            icon: "success",
+            buttons: {
+              confirm: {
+                text: "OK",
+                className: "btn btn-primary text-white", // Class cho nút Đồng ý
+              },
+            },
+          });
+
+          // Sau khi cập nhật thành công, xóa nội dung form hoặc đóng modal
+        })
+        .catch(function (error) {
+          // Xử lý khi có lỗi xảy ra trong quá trình cập nhật
+          swal({
+            title: "Lỗi",
+            text: "Đã có lỗi xảy ra. Vui lòng thử lại sau",
+            icon: "error",
+            buttons: {
+              confirm: {
+                text: "OK",
+                className: "btn btn-danger text-white", // Class cho nút Đồng ý
+              },
+            },
+          });
+        });
+    };
+    // XOA USER
+    $scope.confirmDeleteUser = function (user) {
+      // Sử dụng hộp thoại xác nhận của Bootstrap
+      swal({
+        title: "Bạn có chắc chắn muốn xóa?",
+        text: "Sau khi xóa, bạn sẽ không thể khôi phục lại dữ liệu!",
+        icon: "warning",
+        buttons: {
+          cancel: "Hủy",
+          confirm: {
+            text: "Xóa",
+            className: "btn-danger",
+          },
+        },
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          // Nếu người dùng xác nhận xóa
+          // Gọi hàm deleteProduct để xóa sản phẩm
+          $scope.deleteUser(user);
+        }
+      });
+    };
+    $scope.deleteUser = function (user) {
+      // Thực hiện gửi yêu cầu xóa sản phẩm đến máy chủ
+      $http
+        .delete("http://localhost:3000/user/" + user.id)
+        .then(function (response) {
+          // Xóa sản phẩm khỏi danh sách products
+          $scope.users = $scope.users.filter(function (item) {
+            return item.id !== user.id;
+          });
+
+          // Hiển thị thông báo thành công
+          swal("Thành công", "Sản phẩm đã được xóa thành công!", "success");
+        })
+        .catch(function (error) {
+          // Xử lý lỗi nếu có
+          console.error("Error deleting product: ", error);
+          swal(
+            "Lỗi",
+            "Đã xảy ra lỗi khi xóa sản phẩm. Vui lòng thử lại sau.",
+            "error"
+          );
+        });
+    };
+    $scope.totalPageUser = function () {
+      if ($scope.users && $scope.users.length > 0) {
+        return Math.ceil($scope.users.length / $scope.limit);
+      } else {
+        return 0; // or any default value as per your requirement
+      }
+    };
+    // option 1
+    $scope.totalListUser = function () {
+      let arr = [];
+      for (let i = 1; i <= $scope.totalPageUser(); i++) {
+        arr.push(i);
+      }
+      return arr;
+    };
+
+    // XỬ LÝ ROLE
+    $http.get("http://localhost:3000/role").then((res) => {
+      $scope.roles = res.data;
+    });
+    $scope.roleNew = {
+      name: "",
+      img: "",
+      email: "",
+      phone: "",
+      password: "",
+      position: "",
+    };
+    $scope.addRoleNew = () => {
+      // console.log($scope.roleNew);
+      $http.post("http://localhost:3000/role", $scope.roleNew).then((res) => {
+        showSuccessMessage();
+      });
+    };
+    // EDIT ROLE
+    $scope.openEditRole = function (role) {
+      $scope.roleNew = angular.copy(role);
+      $scope.isEditing = true;
+    };
+    $scope.EditRole = function () {
+      $http
+        .put("http://localhost:3000/role/" + $scope.roleNew.id, $scope.roleNew)
+        .then(function (response) {
+          // Xử lý khi cập nhật thành công
+          swal({
+            title: "Thành công",
+            text: "Sản phẩm đã được cập nhật thành công",
+            icon: "success",
+            buttons: {
+              confirm: {
+                text: "OK",
+                className: "btn btn-primary text-white", // Class cho nút Đồng ý
+              },
+            },
+          });
+
+          // Sau khi cập nhật thành công, xóa nội dung form hoặc đóng modal
+        })
+        .catch(function (error) {
+          // Xử lý khi có lỗi xảy ra trong quá trình cập nhật
+          swal({
+            title: "Lỗi",
+            text: "Đã có lỗi xảy ra. Vui lòng thử lại sau",
+            icon: "error",
+            buttons: {
+              confirm: {
+                text: "OK",
+                className: "btn btn-danger text-white", // Class cho nút Đồng ý
+              },
+            },
+          });
+        });
+    };
+    // XOA ROLE
+    $scope.confirmDeleteRole = function (role) {
+      // Sử dụng hộp thoại xác nhận của Bootstrap
+      swal({
+        title: "Bạn có chắc chắn muốn xóa?",
+        text: "Sau khi xóa, bạn sẽ không thể khôi phục lại dữ liệu!",
+        icon: "warning",
+        buttons: {
+          cancel: "Hủy",
+          confirm: {
+            text: "Xóa",
+            className: "btn-danger",
+          },
+        },
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          // Nếu người dùng xác nhận xóa
+          // Gọi hàm deleteProduct để xóa sản phẩm
+          $scope.deleteRole(role);
+        }
+      });
+    };
+    $scope.deleteRole = function (role) {
+      // Thực hiện gửi yêu cầu xóa sản phẩm đến máy chủ
+      $http
+        .delete("http://localhost:3000/role/" + role.id)
+        .then(function (response) {
+          // Xóa sản phẩm khỏi danh sách products
+          $scope.roles = $scope.roles.filter(function (item) {
+            return item.id !== role.id;
+          });
+
+          // Hiển thị thông báo thành công
+          swal("Thành công", "Sản phẩm đã được xóa thành công!", "success");
+        })
+        .catch(function (error) {
+          // Xử lý lỗi nếu có
+          console.error("Error deleting product: ", error);
+          swal(
+            "Lỗi",
+            "Đã xảy ra lỗi khi xóa sản phẩm. Vui lòng thử lại sau.",
+            "error"
+          );
+        });
+    };
+    $scope.totalPageRole = function () {
+      if ($scope.roles && $scope.roles.length > 0) {
+        return Math.ceil($scope.roles.length / $scope.limit);
+      } else {
+        return 0; // or any default value as per your requirement
+      }
+    };
+    // option 1
+    $scope.totalListRole = function () {
+      let arr = [];
+      for (let i = 1; i <= $scope.totalPageRole(); i++) {
+        arr.push(i);
+      }
+      return arr;
+    };
+    // XU LY BILL
+    $http.get("http://localhost:3000/bill").then((res) => {
+      $scope.bills = res.data;
+    });
+    $scope.getTotalAmount = function () {
+      var total = 0;
+      $scope.bills.forEach((item) => {
+        total += item.totalAmount;
+      });
+
+      return total;
+    };
+    $scope.countBills = function () {
+      if ($scope.bills && $scope.bills.length > 0) {
+        return $scope.bills.length;
+      } else {
+        return 0;
+      }
+    };
+    $scope.billdetail = function (billId) {
+      // Gửi yêu cầu lấy chi tiết của hóa đơn dựa trên billId
+      $http.get("http://localhost:3000/bill/" + billId).then(function (res) {
+        // Gán dữ liệu hóa đơn chi tiết vào một biến
+        $scope.selectedBill = res.data;
+      });
+    };
+    //  Phan  trang bill
+    $scope.totalPageBill = function () {
+      if ($scope.bills && $scope.bills.length > 0) {
+        return Math.ceil($scope.bills.length / $scope.limit);
+      } else {
+        return 0; // or any default value as per your requirement
+      }
+    };
+    // option 1
+    $scope.totalListBill = function () {
+      let arr = [];
+      for (let i = 1; i <= $scope.totalPageBill(); i++) {
+        arr.push(i);
+      }
+      return arr;
+    };
+    // Xóa bill
+    $scope.confirmDeleteBill = function (bill) {
+      // Sử dụng hộp thoại xác nhận của Bootstrap
+      swal({
+        title: "Bạn có chắc chắn muốn xóa?",
+        text: "Sau khi xóa, bạn sẽ không thể khôi phục lại dữ liệu!",
+        icon: "warning",
+        buttons: {
+          cancel: "Hủy",
+          confirm: {
+            text: "Xóa",
+            className: "btn-danger",
+          },
+        },
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          // Nếu người dùng xác nhận xóa
+          // Gọi hàm deleteProduct để xóa sản phẩm
+          $scope.deleteBill(bill);
+        }
+      });
+    };
+    $scope.deleteBill = function (bill) {
+      // Thực hiện gửi yêu cầu xóa sản phẩm đến máy chủ
+      $http
+        .delete("http://localhost:3000/bill/" + bill.id)
+        .then(function (response) {
+          // Xóa sản phẩm khỏi danh sách products
+          $scope.bills = $scope.bills.filter(function (item) {
+            return item.id !== bill.id;
+          });
+
+          // Hiển thị thông báo thành công
+          swal("Thành công", "Sản phẩm đã được xóa thành công!", "success");
+        })
+        .catch(function (error) {
+          // Xử lý lỗi nếu có
+          console.error("Error deleting product: ", error);
+          swal(
+            "Lỗi",
+            "Đã xảy ra lỗi khi xóa sản phẩm. Vui lòng thử lại sau.",
+            "error"
+          );
+        });
+    };
+    // XỬ LÍ CHART THỐNG KÊ
   })
   .filter("search", () => {
     return (input, keyword, atrr) => {

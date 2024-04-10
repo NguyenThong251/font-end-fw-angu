@@ -3,7 +3,7 @@
     class="side-header-content px-3 w-250 d-flex justify-content-between align-items-center"
   >
     <a href="" class="sidebar-header-logo">
-      <img src="uploads/logo.png" alt="" width="100px" />
+      <img src="../../uploads/logoo.png" alt="" width="100px" />
     </a>
     <div class="sidebar-header-btn d-flex align-items-center gap-2">
       <button
@@ -41,7 +41,7 @@
         class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
       >
         <ion-icon class="text-primary fs-5" name="layers"></ion-icon>
-        <span class="fs-6 fw-medium">Products</span>
+        <span class="fs-6 fw-medium text-primary">Products</span>
       </div>
       <!-- Menu cấp 2 -->
       <!-- id="collapseOne-product" -->
@@ -53,7 +53,7 @@
           <ul class="gap-3 d-flex flex-column">
             <li>
               <a
-                class="text-decoration-none hover-list text-dark fw-medium"
+                class="text-decoration-none hover-list text-primary fw-medium"
                 href="#!product"
               >
                 Product List</a
@@ -61,7 +61,7 @@
             </li>
             <li>
               <a
-                class="text-decoration-none hover-list text-dark fw-medium"
+                class="text-decoration-none hover-list text-primary fw-medium"
                 href="#!addproduct"
               >
                 Product Add</a
@@ -79,8 +79,8 @@
       <div
         class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
       >
-        <ion-icon class="text-primary fs-5" name="layers"></ion-icon>
-        <span class="fs-6 fw-medium">Category</span>
+        <ion-icon class="text-primary fs-5" name="list"></ion-icon>
+        <span class="fs-6 fw-medium text-primary">Category</span>
       </div>
       <!-- Menu cấp 2 -->
       <!-- id="collapseOne-product" -->
@@ -92,15 +92,15 @@
           <ul class="gap-3 d-flex flex-column">
             <li>
               <a
-                class="text-decoration-none hover-list text-dark fw-medium"
+                class="text-decoration-none hover-list text-primary fw-medium"
                 href="#!category"
               >
-                Product List</a
+                Category List</a
               >
             </li>
             <li>
               <a
-                class="text-decoration-none hover-list text-dark fw-medium"
+                class="text-decoration-none hover-list text-primary fw-medium"
                 href="#!addcategory"
               >
                 Category Add</a
@@ -121,7 +121,7 @@
         class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
       >
         <ion-icon class="text-primary fs-5" name="albums"></ion-icon>
-        <span class="fs-6 fw-medium">Blog</span>
+        <span class="fs-6 fw-medium text-primary">Blog</span>
       </div>
       <!-- Menu cấp 2 -->
       <div
@@ -133,7 +133,7 @@
           <ul class="gap-3 d-flex flex-column">
             <li>
               <a
-                class="text-decoration-none hover-list text-dark fw-medium"
+                class="text-decoration-none hover-list text-primary fw-medium"
                 href=""
               >
                 Blog List</a
@@ -141,7 +141,7 @@
             </li>
             <li>
               <a
-                class="text-decoration-none hover-list text-dark fw-medium"
+                class="text-decoration-none hover-list text-primary fw-medium"
                 href=""
               >
                 Blog Add</a
@@ -151,121 +151,60 @@
         </div>
       </div>
     </li>
-    <li
-      class="side-nav-item list-group-item"
-      data-bs-toggle="collapse"
-      data-bs-target="#collapseOne-user"
-      aria-expanded="false"
-      aria-controls="collapseOne-user"
-    >
-      <div
-        class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+    <li class="side-nav-item list-group-item">
+      <a
+        href="#!user"
+        class="side-nav-item-content text-primary text-decoration-none p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
       >
         <ion-icon class="text-primary fs-5" name="people"></ion-icon>
         <span class="fs-6 fw-medium">User</span>
-      </div>
-      <!-- Menu cấp 2 -->
-      <div
-        id="collapseOne-user"
-        class="accordion-collapse collapse"
-        data-bs-parent="#accordionExample"
-      >
-        <div class="accordion-body">
-          <ul class="gap-3 d-flex flex-column">
-            <li>
-              <a
-                class="text-decoration-none hover-list text-dark fw-medium"
-                href=""
-              >
-                User List</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-decoration-none hover-list text-dark fw-medium"
-                href=""
-              >
-                User Add</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+      </a>
     </li>
-    <li
-      class="side-nav-item list-group-item"
-      data-bs-toggle="collapse"
-      data-bs-target="#collapseOne-role"
-      aria-expanded="false"
-      aria-controls="collapseOne-role"
-    >
-      <div
-        class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+    <li class="side-nav-item list-group-item">
+      <a
+        href="#!role"
+        class="side-nav-item-content text-primary text-decoration-none p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
       >
         <ion-icon class="text-primary fs-5" name="person"></ion-icon>
         <span class="fs-6 fw-medium">Role</span>
-      </div>
-      <!-- Menu cấp 2 -->
-      <div
-        id="collapseOne-role"
-        class="accordion-collapse collapse"
-        data-bs-parent="#accordionExample"
-      >
-        <div class="accordion-body">
-          <ul class="gap-3 d-flex flex-column">
-            <li>
-              <a
-                class="text-decoration-none hover-list text-dark fw-medium"
-                href=""
-              >
-                Role List</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-decoration-none hover-list text-dark fw-medium"
-                href=""
-              >
-                Role Add</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+      </a>
     </li>
   </div>
 
   <li class="side-nav-item list-group-item">
-    <div
-      class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+    <a
+      href="#!order"
+      class="side-nav-item-content text-decoration-none text-primary p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
     >
       <ion-icon class="text-primary fs-5" name="bag-handle"></ion-icon>
       <span class="fs-6 fw-medium">Order</span>
-    </div>
+    </a>
   </li>
   <li class="side-nav-item list-group-item">
     <div
       class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
     >
       <ion-icon class="text-primary fs-5" name="chatbox-ellipses"></ion-icon>
-      <span class="fs-6 fw-medium">Comment</span>
+      <span class="text-primary fs-6 fw-medium">Comment</span>
     </div>
   </li>
 
   <li class="side-nav-item list-group-item">
-    <div
-      class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
+    <a
+      href="#!setting"
+      class="side-nav-item-content text-decoration-none text-primary p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
     >
       <ion-icon class="text-primary fs-5" name="settings"></ion-icon>
       <span class="fs-6 fw-medium">Setting</span>
-    </div>
+    </a>
   </li>
   <li class="side-nav-item list-group-item">
     <div
+      ng-click="logout()"
       class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
     >
       <ion-icon class="text-primary fs-5" name="log-out"></ion-icon>
-      <span class="fs-6 fw-medium">Logout</span>
+      <span class="fs-6 fw-medium text-primary">Logout</span>
     </div>
   </li>
 </ul>

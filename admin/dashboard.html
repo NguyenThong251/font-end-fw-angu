@@ -8,7 +8,7 @@
       >
         <div class="ms-3 dashboard-list-body">
           <span class="text-border-color fs-5 fw-medium">Total Revenue</span>
-          <h4>$6659</h4>
+          <h4>{{getTotalAmount() | number : 0}} VNĐ</h4>
         </div>
         <div class="dashboard-list-icon text-center align-self-center">
           <ion-icon
@@ -28,7 +28,7 @@
       >
         <div class="ms-3 dashboard-list-body">
           <span class="text-border-color fs-5 fw-medium">Total Order</span>
-          <h4>1229</h4>
+          <h4>{{countBills()}}</h4>
         </div>
         <div class="dashboard-list-icon text-center align-self-center">
           <ion-icon
@@ -48,7 +48,7 @@
       >
         <div class="ms-3 dashboard-list-body">
           <span class="text-border-color fs-5 fw-medium">Total Products</span>
-          <h4>659</h4>
+          <h4>{{countProduct()}}</h4>
         </div>
         <div class="dashboard-list-icon text-center align-self-center">
           <ion-icon
@@ -68,7 +68,7 @@
       >
         <div class="ms-3 dashboard-list-body">
           <span class="text-border-color fs-5 fw-medium">Total Customers</span>
-          <h4>4.6K</h4>
+          <h4>{{countUsers()}}</h4>
         </div>
         <div class="dashboard-list-icon text-center align-self-center">
           <ion-icon
@@ -84,7 +84,7 @@
       class="dashboard-list overflow-hidden p-3 bg-white border border-2 border-secondary rounded-2 shadow-sm"
     >
       <div class="dashboard-list-header">
-        <h4 class="fs-5">Revenue Report</h4>
+        <h4 class="fs-5">Product</h4>
       </div>
       <div
         id="RevenueReport"
@@ -92,30 +92,46 @@
       ></div>
     </div>
   </div>
-  <div class="col-xl-6">
-    <div
-      class="dashboard-list overflow-hidden p-3 bg-white border border-2 border-secondary rounded-2 shadow-sm"
-    >
-      <div class="dashboard-list-header">
-        <h4 class="fs-5">Earning</h4>
-      </div>
-      <div
-        id="Earning"
-        class="dashboard-list-content py-2 d-flex justify-content-between"
-      ></div>
-    </div>
-  </div>
-  <div class="col-xl-6">
-    <div
-      class="dashboard-list overflow-hidden p-3 bg-white border border-2 border-secondary rounded-2 shadow-sm"
-    >
-      <div class="dashboard-list-header">
-        <h4 class="fs-5">Visitor</h4>
-      </div>
-      <div
-        id="Visitor"
-        class="dashboard-list-content py-2 d-flex justify-content-center"
-      ></div>
-    </div>
-  </div>
 </div>
+<script>
+  // admin
+  // var RevenueReport = {
+  //   series: [
+  //     {
+  //       data: [10, 8, 6, 4, 2],
+  //     },
+  //   ],
+  //   chart: {
+  //     type: "bar",
+  //     height: 350,
+  //     toolbar: {
+  //       show: false,
+  //     },
+  //   },
+  //   color: ["#198754", "#0d6efd", "#ffc107", "#dc3545;", "#64b496"],
+
+  //   plotOptions: {
+  //     bar: {
+  //       distributed: true,
+  //       borderRadius: 4,
+  //       horizontal: false,
+  //       columnWidth: "40%",
+  //     },
+  //   },
+  //   dataLabels: {
+  //     enabled: false,
+  //   },
+  //   legend: {
+  //     show: false,
+  //   },
+  //   xaxis: {
+  //     categories: ["Rau", "Banh", "Hat", "Gao", "Quan ao"],
+  //   },
+  // };
+
+  // var chart = new ApexCharts(
+  //   document.querySelector("#RevenueReport"),
+  //   RevenueReport
+  // );
+  // chart.render();
+</script>
