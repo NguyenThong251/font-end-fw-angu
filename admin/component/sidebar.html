@@ -25,7 +25,9 @@
   <li class="side-nav-item list-group-item">
     <a
       href="#!dashboard"
-      class="side-nav-item-content text-decoration-none text-primary p-2 rounded-2 d-flex gap-3 align-items-center cursor hover-item active-navbar"
+      ng-click="setActive('dashboard')"
+      ng-class="{ 'active-navbar': activeTab === 'dashboard' }"
+      class="side-nav-item-content text-decoration-none text-primary p-2 rounded-2 d-flex gap-3 align-items-center cursor hover-item"
     >
       <ion-icon class="text-primary fs-5" name="rocket"></ion-icon>
       <span class="fs-6 fw-medium">Dashboard</span>
@@ -38,6 +40,8 @@
       ng-class="{ 'active': isCollapsed }"
     >
       <div
+        ng-click="setActive('product')"
+        ng-class="{ 'active-navbar': activeTab === 'product' }"
         class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
       >
         <ion-icon class="text-primary fs-5" name="layers"></ion-icon>
@@ -77,6 +81,8 @@
       ng-class="{ 'active': isCategoryCollapsed }"
     >
       <div
+        ng-click="setActive('category')"
+        ng-class="{ 'active-navbar': activeTab === 'category' }"
         class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
       >
         <ion-icon class="text-primary fs-5" name="list"></ion-icon>
@@ -110,7 +116,7 @@
         </div>
       </div>
     </li>
-    <li
+    <!-- <li
       class="side-nav-item list-group-item"
       data-bs-toggle="collapse"
       data-bs-target="#collapseOne-blog"
@@ -123,7 +129,6 @@
         <ion-icon class="text-primary fs-5" name="albums"></ion-icon>
         <span class="fs-6 fw-medium text-primary">Blog</span>
       </div>
-      <!-- Menu cấp 2 -->
       <div
         id="collapseOne-blog"
         class="accordion-collapse collapse"
@@ -150,9 +155,11 @@
           </ul>
         </div>
       </div>
-    </li>
+    </li> -->
     <li class="side-nav-item list-group-item">
       <a
+        ng-click="setActive('user')"
+        ng-class="{ 'active-navbar': activeTab === 'user' }"
         href="#!user"
         class="side-nav-item-content text-primary text-decoration-none p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
       >
@@ -162,6 +169,8 @@
     </li>
     <li class="side-nav-item list-group-item">
       <a
+        ng-click="setActive('role')"
+        ng-class="{ 'active-navbar': activeTab === 'role' }"
         href="#!role"
         class="side-nav-item-content text-primary text-decoration-none p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
       >
@@ -173,6 +182,8 @@
 
   <li class="side-nav-item list-group-item">
     <a
+      ng-click="setActive('order')"
+      ng-class="{ 'active-navbar': activeTab === 'order' }"
       href="#!order"
       class="side-nav-item-content text-decoration-none text-primary p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
     >

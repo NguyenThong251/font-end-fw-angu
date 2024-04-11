@@ -223,7 +223,7 @@ app
             categoryCounts[product.category]++;
           }
         });
-
+        console.log(categoryCounts);
         // Tạo biểu đồ cột
         var RevenueReport = {
           series: [
@@ -254,7 +254,10 @@ app
             show: false,
           },
           xaxis: {
-            categories: Object.keys(categoryCounts),
+            categories: [
+              ...new Set($scope.categorys.flatMap((item) => [item.name])),
+            ],
+            // categories: Object.keys(categoryCounts),
           },
         };
 
@@ -947,7 +950,11 @@ app
           );
         });
     };
-    // XỬ LÍ CHART THỐNG KÊ
+    $scope.activeTab = ""; // Biến để theo dõi tab nào đang active
+
+    $scope.setActive = function (tab) {
+      $scope.activeTab = tab;
+    };
   })
   .filter("search", () => {
     return (input, keyword, atrr) => {
